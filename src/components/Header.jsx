@@ -14,10 +14,10 @@ const Header = ({ token, setToken }) => {
           <div className="headerButton">
             <button> My collection</button>
             <button
-              className="headerBut"
-              onClick={() => {
-                setToken("");
-              }}
+            // className="headerBut"
+            // onClick={() => {
+            //   setToken("");
+            // }}
             >
               Log Out
             </button>

@@ -11,15 +11,17 @@ import Signup from "./pages/Signup";
 import Cookies from "js-cookie";
 
 function App() {
-  const [token, setToken] = useState();
+  const [token, setToken] = useState(Cookies.get("token"));
 
   const API_KEY = "899db466e6d64907bb6dbc7dd3670574";
 
   useEffect(() => {
     if (token) {
       Cookies.set("token", token, { expires: 7 });
+      console.log("token exist");
     } else {
       Cookies.remove("token");
+      console.log("token no exist");
     }
   }, [token]);
 
