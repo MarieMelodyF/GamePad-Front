@@ -40,9 +40,14 @@ function App() {
               <Login API_KEY={API_KEY} token={token} setToken={setToken} />
             }
           />
-          <Route path="/user/signup" element={<Signup API_KEY={API_KEY} />} />
           <Route
-            path="/games/:id/reviews"
+            path="/user/signup"
+            element={
+              <Signup API_KEY={API_KEY} token={token} setToken={setToken} />
+            }
+          />
+          <Route
+            path="/games/reviews/:id"
             element={
               <Reviews API_KEY={API_KEY} token={token} setToken={setToken} />
             }

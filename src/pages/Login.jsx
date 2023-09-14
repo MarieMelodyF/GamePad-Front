@@ -50,6 +50,7 @@ const Login = ({ setToken }) => {
               // console.log("data.token", response.data.token);
               navigate("/");
               setToken(response.data.token);
+              console.log("login", response.data.token);
               console.log(response.data.token);
             } catch (error) {
               error.response;

@@ -2,12 +2,12 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Signup = () => {
+const Signup = ({ token, setToken }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const [token, setToken] = useState("");
+  // const [token, setToken] = useState("");
   const [sowhErrorMessage, setSowhErrorMessage] = useState(false);
 
   const handleUsername = (event) => {

@@ -2,15 +2,17 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
-const Reviews = (token) => {
-  console.log(token);
+const Reviews = ({ token }) => {
+  // console.log(token);
 
   const { id } = useParams();
+  // console.log(id);
   const [formData, setFormData] = useState({
     title: "",
     reviews: "",
     game_id: id,
   });
+  // console.log(formData);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (event) => {
@@ -25,13 +27,13 @@ const Reviews = (token) => {
     event.preventDefault();
 
     try {
-      if (formData.reviews.length < 10) {
-        setErrorMessage("You need at least 10 characters to publish a review.");
-        return;
-      }
+      // if (formData.reviews.length < 10) {
+      //   setErrorMessage("You need at least 10 characters to publish a review.");
+      //   return;
+      // }
 
       const response = await axios.post(
-        `http://localhost:3000/games/${id}/reviews`,
+        `http://localhost:3000/games/reviews`,
         {
           title: formData.title,
           reviews: formData.reviews,
