@@ -34,7 +34,7 @@ const AllGames = () => {
         setIsLoading(false);
         setCount(count);
       } catch (error) {
-        console.log(error.message);
+        console.log("error", error.message);
       }
     };
 
@@ -53,7 +53,7 @@ const AllGames = () => {
               className="pageButton2"
               onClick={() => {
                 setPage(page - 1);
-                console.log(page);
+                // console.log(page);
               }}
             >
               Previous

@@ -80,7 +80,7 @@ const Games = ({ API_KEY }) => {
           <div className="middleCol">
             <div>
               <button>Add to collection</button>
-              <Link to="/publish/reviews">
+              <Link to={`/games/${id}/reviews`}>
                 <button>Add reviews</button>
               </Link>
             </div>

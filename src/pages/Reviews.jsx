@@ -1,13 +1,15 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
-const Reviews = ({ game_id, game_name }) => {
-  console.log(game_id);
+const Reviews = (token) => {
+  console.log(token);
+
+  const { id } = useParams();
   const [formData, setFormData] = useState({
     title: "",
     reviews: "",
-    game_id: game_id,
-    game_name: game_name,
+    game_id: id,
   });
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -29,17 +31,22 @@ const Reviews = ({ game_id, game_name }) => {
       }
 
       const response = await axios.post(
-        "http://localhost:3000/publish/reviews",
+        `http://localhost:3000/games/${id}/reviews`,
         {
           title: formData.title,
           reviews: formData.reviews,
-          game_id: game_id,
-          game_name: game_name,
+          game_id: id,
+        },
+
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
         }
       );
       console.log("Response:", response.data);
     } catch (error) {
-      console.error("Error:", error.message);
+      console.error("Error:", error.response);
       setErrorMessage("An error occurred while submitting the review.");
     }
   };
