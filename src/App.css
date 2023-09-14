@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap");
 .container {
   width: 1280px;
   /* border: 1px solid red; */
@@ -8,6 +9,7 @@
 body {
   background-color: #202023;
   color: white;
+  font-family: "Montserrat", sans-serif;
 }
 a {
   text-decoration: none;
@@ -82,7 +84,7 @@ div .headerBut {
     -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
   background: linear-gradient(
     to right,
-    rgb(255, 0, 0) 0%,
+    rgba(255, 0, 0, 0.84) 0%,
     rgb(236, 31, 68) 50%,
     rgba(226, 57, 93, 0.571) 100%
   );
@@ -328,4 +330,50 @@ i {
   position: absolute;
   top: 260px;
   left: 330px;
+}
+
+/* ------------------- */
+/* ------------------- */
+/* ------REVIEWS------ */
+/* ------------------- */
+/* ------------------- */
+.reviewsForm {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  padding: 40px;
+  background-color: #424448;
+  border-radius: 10px;
+}
+.form {
+  margin-top: 100px;
+  height: 290px;
+  width: 650px;
+  /* border: 1px solid red; */
+}
+label {
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+.reviews-submit {
+  margin-top: 20px;
+  height: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.reviewsButton {
+  margin-top: 10px;
+  height: 40px;
+  width: 150px;
+  border-radius: 10px;
+  background: linear-gradient(
+    to left,
+    rgba(255, 0, 0, 0.891) 0%,
+    rgb(236, 31, 68) 50%,
+    rgba(226, 57, 93, 0.571) 100%
+  );
+  color: #fff;
 }

@@ -35,14 +35,7 @@ const Signup = () => {
       event.preventDefault();
       setSowhErrorMessage(false);
 
-      const data = {
-        username: username,
-        email: email,
-        password: password,
-        password2: password2,
-      };
-
-      console.log("data", data);
+      // console.log("data", data);
       const response = await axios.post(`http://localhost:3000/user/signup`, {
         username: username,
         email: email,

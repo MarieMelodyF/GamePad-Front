@@ -2,14 +2,18 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import img from "../images/notfound2.jpg";
+import { Link } from "react-router-dom";
 
 const Games = ({ API_KEY }) => {
-  const [data, setData] = useState();
-  const [gameLike, setGameLike] = useState();
-
+  const [data, setData] = useState("");
+  const [gameLike, setGameLike] = useState("");
+  const [game_id, setGame_id] = useState("");
+  const [game_name, setGame_name] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
-  //   console.log(id);
+
+  // console.log(game_id);
+  // console.log(game_name);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,10 +28,14 @@ const Games = ({ API_KEY }) => {
           axios.spread((...responses) => {
             const responseOne = responses[0];
             const responseTwo = responses[1];
-            // use/access the results
             // console.log("responseOne", responseOne);
             // console.log("responseTwo", responseTwo);
+            const gameid = responseOne.data.id;
+            const gamename = responseOne.data.name;
 
+            setGame_id(gameid);
+            setGame_name(gamename);
+            // console.log(gameid);
             setData(responseOne.data);
             // console.log("infosGame ==>", responseOne.data);
             setGameLike(responseTwo.data);
@@ -72,7 +80,9 @@ const Games = ({ API_KEY }) => {
           <div className="middleCol">
             <div>
               <button>Add to collection</button>
-              <button>Add reviews</button>
+              <Link to="/publish/reviews">
+                <button>Add reviews</button>
+              </Link>
             </div>
             <p>plateform</p>
             {data.platforms.map(({ platform: { name }, index }) => {
