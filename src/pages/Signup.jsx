@@ -41,8 +41,7 @@ const Signup = ({ token, setToken }) => {
       formData.append("email", email);
       formData.append("password", password);
       formData.append("password2", password2);
-      formData.append("avatar_user", avatar_user);
-      formData.append("imgCloudinary", imgCloudinary);
+      formData.append("avatar", avatar_user);
 
       // console.log("data", data);
       const response = await axios.post(
@@ -52,7 +51,7 @@ const Signup = ({ token, setToken }) => {
       console.log("res.data =>", response.data);
       //   console.log("data2 =>", data);
       const token = response.data.token;
-      setImgCloudinary(response.data.avatar_user.secure_url);
+      setAvatar_user(response.data.avatar_user.secure_url);
       setToken(token);
       if (password === password2 && username !== "" && email !== "") {
         alert("Your account is created ✨");
@@ -122,7 +121,13 @@ const Signup = ({ token, setToken }) => {
               value={password2}
               placeholder="Password"
             />
-            <input type="file" placeholder="Add a Photo" />
+            <input
+              onChange={(event) => {
+                setAvatar_user(event.target.files[0]);
+              }}
+              type="file"
+              placeholder="Add a Photo"
+            />
           </form>
           <button
             onClick={handleSubmit}
