@@ -12,7 +12,6 @@ import Cookies from "js-cookie";
 import Reviews from "./pages/Reviews";
 
 function App() {
-  const [data, setData] = useState("");
   const [token, setToken] = useState(Cookies.get("token"));
 
   const API_KEY = "899db466e6d64907bb6dbc7dd3670574";

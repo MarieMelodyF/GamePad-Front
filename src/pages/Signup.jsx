@@ -7,7 +7,9 @@ const Signup = ({ token, setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  // const [token, setToken] = useState("");
+  const [imgCloudinary, setImgCloudinary] = useState("");
+  const [avatar_user, setAvatar_user] = useState("");
+
   const [sowhErrorMessage, setSowhErrorMessage] = useState(false);
 
   const handleUsername = (event) => {
@@ -34,17 +36,23 @@ const Signup = ({ token, setToken }) => {
     try {
       event.preventDefault();
       setSowhErrorMessage(false);
+      const formData = new FormData();
+      formData.append("username", username);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("password2", password2);
+      formData.append("avatar_user", avatar_user);
+      formData.append("imgCloudinary", imgCloudinary);
 
       // console.log("data", data);
-      const response = await axios.post(`http://localhost:3000/user/signup`, {
-        username: username,
-        email: email,
-        password: password,
-        password2: password2,
-      });
-      //   console.log("res. =>", response);
+      const response = await axios.post(
+        "http://localhost:3000/user/signup",
+        formData
+      );
+      console.log("res.data =>", response.data);
       //   console.log("data2 =>", data);
       const token = response.data.token;
+      setImgCloudinary(response.data.avatar_user.secure_url);
       setToken(token);
       if (password === password2 && username !== "" && email !== "") {
         alert("Your account is created ✨");

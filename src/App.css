@@ -263,6 +263,7 @@ i {
 /* --------GAME------- */
 /* ------------------- */
 /* ------------------- */
+
 .form-log {
   display: flex;
   margin-top: 150px;
@@ -337,6 +338,7 @@ i {
 /* ------REVIEWS------ */
 /* ------------------- */
 /* ------------------- */
+
 .reviewsForm {
   display: flex;
   flex-direction: column;
@@ -376,4 +378,39 @@ label {
     rgba(226, 57, 93, 0.571) 100%
   );
   color: #fff;
+}
+
+/* ------------------- */
+/* ------------------- */
+/* ----GAME-REVIEWS--- */
+/* ------------------- */
+/* ------------------- */
+.start-reviews {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.allreviews {
+  background-color: #313235;
+  margin-bottom: 50px;
+  border-radius: 10px;
+}
+
+.titlereviews {
+  text-decoration: underline;
+  font-size: 18px;
+  padding: 10px;
+}
+.reviews p {
+  /* background-color: purple; */
+  font-size: 18px;
+  padding: 10px;
+  color: #bcbcbd;
+}
+
+.user p {
+  /* background-color: tomato; */
+  font-size: 18px;
+  padding: 10px;
 }

@@ -31,7 +31,6 @@ const Reviews = ({ token }) => {
       //   setErrorMessage("You need at least 10 characters to publish a review.");
       //   return;
       // }
-
       const response = await axios.post(
         `http://localhost:3000/games/reviews`,
         {

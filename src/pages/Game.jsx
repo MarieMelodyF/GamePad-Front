@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import img from "../images/notfound2.jpg";
 import { Link } from "react-router-dom";
+import Reviews from "./Reviews";
 
 const Games = ({ API_KEY }) => {
   const [data, setData] = useState("");
@@ -10,8 +11,9 @@ const Games = ({ API_KEY }) => {
   const [game_id, setGame_id] = useState("");
   const [game_name, setGame_name] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [reviews, setReviews] = useState();
+  const [showReviews, setShowReviews] = useState();
   const { id } = useParams();
-
   // console.log(game_id);
   // console.log(game_name);
 
@@ -52,8 +54,22 @@ const Games = ({ API_KEY }) => {
     fetchData();
   }, []);
 
-  // console.log(data);
-  //   console.log(gameLike.results);
+  useEffect(() => {
+    const allReviews = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/allreviews/${id}`
+        );
+        response.data.map((reviews) => ({
+          ...reviews,
+        }));
+        setShowReviews(response);
+        console.log("responseallreviews", showReviews[0].title);
+      } catch (error) {}
+    };
+    allReviews();
+    console.log("useeffectgamereview");
+  }, []);
 
   return isLoading ? (
     <p> En chargement...</p>
@@ -153,6 +169,27 @@ const Games = ({ API_KEY }) => {
             );
           })}
         </div>
+
+        <h1 className="start-reviews">Reviews</h1>
+        {showReviews.data.map(
+          ({ title, reviews, author: { username } }, index) => {
+            return (
+              <div className="allreviews">
+                <div className="titlereviews">
+                  <p>{title}</p>
+                </div>
+
+                <div className="reviews">
+                  <p>{reviews}</p>
+                </div>
+
+                <div className="user">
+                  <p>{username}</p>
+                </div>
+              </div>
+            );
+          }
+        )}
       </main>
     </>
   );
