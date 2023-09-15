@@ -64,11 +64,11 @@ const Games = ({ API_KEY }) => {
           ...reviews,
         }));
         setShowReviews(response);
-        console.log("responseallreviews", showReviews[0].title);
+        // console.log("responseallreviews", showReviews.data[0].title);
       } catch (error) {}
     };
     allReviews();
-    console.log("useeffectgamereview");
+    // console.log("useeffectgamereview");
   }, []);
 
   return isLoading ? (
@@ -172,7 +172,7 @@ const Games = ({ API_KEY }) => {
 
         <h1 className="start-reviews">Reviews</h1>
         {showReviews.data.map(
-          ({ title, reviews, author: { username } }, index) => {
+          ({ title, reviews, author: { username, avatar_user } }, index) => {
             return (
               <div className="allreviews">
                 <div className="titlereviews">
@@ -184,6 +184,11 @@ const Games = ({ API_KEY }) => {
                 </div>
 
                 <div className="user">
+                  <img
+                    className="img-user"
+                    src={avatar_user.secure_url}
+                    alt="avatar"
+                  />
                   <p>{username}</p>
                 </div>
               </div>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import logo from "../images/smallLogo.png";
 
 const Signup = ({ token, setToken }) => {
   const [username, setUsername] = useState("");
@@ -8,7 +9,7 @@ const Signup = ({ token, setToken }) => {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [imgCloudinary, setImgCloudinary] = useState("");
-  const [avatar_user, setAvatar_user] = useState("");
+  const [avatar_user, setAvatar_user] = useState({});
 
   const [sowhErrorMessage, setSowhErrorMessage] = useState(false);
 
@@ -35,6 +36,7 @@ const Signup = ({ token, setToken }) => {
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
+      console.log(avatar_user);
       setSowhErrorMessage(false);
       const formData = new FormData();
       formData.append("username", username);
@@ -51,7 +53,7 @@ const Signup = ({ token, setToken }) => {
       console.log("res.data =>", response.data);
       //   console.log("data2 =>", data);
       const token = response.data.token;
-      setAvatar_user(response.data.avatar_user.secure_url);
+      // setAvatar_user(response.data.avatar_user.secure_url);
       setToken(token);
       if (password === password2 && username !== "" && email !== "") {
         alert("Your account is created ✨");
@@ -84,28 +86,60 @@ const Signup = ({ token, setToken }) => {
     }
   };
   return (
-    <div>
-      <div className="form-container">
-        <div className="form">
-          <form className="signup-input">
-            <h1>Register now</h1>
+    <div className="container form-log">
+      <div className="col-log-left">
+        <img className="form-logo" src={logo} alt="" />
+        <h1 className="title-form">How it works ?</h1>
+
+        <div className="icon">
+          <i className="fa-regular fa-user"></i>
+          <p>
+            Log in to your free account to be able to get all features of
+            Gamepad
+          </p>
+        </div>
+
+        <div className="icon">
+          <i className="fa-regular fa-bookmark"></i>
+          <p>Add a game to your collection</p>
+        </div>
+
+        <div className="icon">
+          <i className="fa-regular fa-message"></i>
+          <p>Leave a review for a game</p>
+        </div>
+      </div>
+      <div className="col-log-right">
+        <form>
+          <div className="top-form">
+            <div className="right-form">
+              <h1>Register now</h1>
+            </div>
+            <div className="col-log-right2">
+              <input
+                className="user input2"
+                onChange={handleUsername}
+                type="text"
+                name="username"
+                id="MasterChief"
+                value={username}
+                placeholder="Master Chief "
+              />
+              <input
+                className="user input2"
+                onChange={handleEmail}
+                type="email"
+                name="email"
+                id="email"
+                value={email}
+                placeholder="spartan117@unsc.com"
+              />
+            </div>
+          </div>
+
+          <div className="right-form">
             <input
-              onChange={handleUsername}
-              type="text"
-              name="username"
-              id="MasterChief"
-              value={username}
-              placeholder="Master Chief "
-            />
-            <input
-              onChange={handleEmail}
-              type="email"
-              name="email"
-              id="email"
-              value={email}
-              placeholder="spartan117@unsc.com"
-            />
-            <input
+              className=" user input2"
               onChange={handlePassword}
               type="password"
               name="password"
@@ -114,6 +148,7 @@ const Signup = ({ token, setToken }) => {
               placeholder="Password"
             />
             <input
+              className="user input2"
               onChange={handlePassword2}
               type="password"
               name="password"
@@ -121,14 +156,19 @@ const Signup = ({ token, setToken }) => {
               value={password2}
               placeholder="Password"
             />
+          </div>
+
+          <div className="right-form">
             <input
               onChange={(event) => {
+                console.log(event.target.files[0]);
                 setAvatar_user(event.target.files[0]);
               }}
               type="file"
               placeholder="Add a Photo"
             />
-          </form>
+          </div>
+
           <button
             onClick={handleSubmit}
             className="form-validation"
@@ -136,10 +176,16 @@ const Signup = ({ token, setToken }) => {
           >
             Sign up
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );
 };
 
 export default Signup;
+
+// -------------
+// -------------
+// -------------
+// -------------
+// -------------

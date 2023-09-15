@@ -260,7 +260,7 @@ i {
 
 /* ------------------- */
 /* ------------------- */
-/* --------GAME------- */
+/* ------LOG-IN------- */
 /* ------------------- */
 /* ------------------- */
 
@@ -331,6 +331,34 @@ i {
   position: absolute;
   top: 260px;
   left: 330px;
+}
+
+/* ------------------- */
+/* ------------------- */
+/* ------SIGN-IN------ */
+/* ------------------- */
+/* ------------------- */
+
+form .input2 {
+  height: 20px;
+  width: 200px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.col-log-right2 input {
+  width: 430px;
+  margin-top: 20px;
+}
+.input-pass {
+  display: flex;
+}
+.right-form {
+  padding: 20px 0;
+  display: flex;
+}
+.top-form {
+  display: flex;
+  flex-direction: column;
 }
 
 /* ------------------- */
@@ -413,4 +441,14 @@ label {
   /* background-color: tomato; */
   font-size: 18px;
   padding: 10px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+.img-user {
+  height: 60px;
+  border-radius: 50%;
 }
