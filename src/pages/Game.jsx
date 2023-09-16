@@ -10,6 +10,8 @@ const Games = ({ API_KEY }) => {
   const [gameLike, setGameLike] = useState("");
   const [game_id, setGame_id] = useState("");
   const [game_name, setGame_name] = useState("");
+  const [screenShot, setScreenShot] = useState();
+  const [trailer, setTrailer] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [reviews, setReviews] = useState();
   const [showReviews, setShowReviews] = useState();
@@ -21,39 +23,53 @@ const Games = ({ API_KEY }) => {
     const fetchData = async () => {
       let one = `https://api.rawg.io/api/games/${id}?key=${API_KEY}`;
       let two = `https://api.rawg.io/api/games/${id}/game-series?key=${API_KEY}`;
+      let three = `https://api.rawg.io/api/games/${id}/screenshots?key=${API_KEY}`;
+      let four = `https://api.rawg.io/api/games/${id}/movies?key=${API_KEY}`;
 
       const requestOne = axios.get(one);
       const requestTwo = axios.get(two);
-
+      const requestThree = axios.get(three);
+      const requestFour = axios.get(four);
       try {
-        await axios.all([requestOne, requestTwo]).then(
-          axios.spread((...responses) => {
-            const responseOne = responses[0];
-            const responseTwo = responses[1];
-            // console.log("responseOne", responseOne);
-            // console.log("responseTwo", responseTwo);
-            const gameid = responseOne.data.id;
-            const gamename = responseOne.data.name;
+        await axios
+          .all([requestOne, requestTwo, requestThree, requestFour])
+          .then(
+            axios.spread((...responses) => {
+              const responseOne = responses[0];
+              const responseTwo = responses[1];
+              const responseThree = responses[2];
+              const responseFour = responses[3];
+              // console.log("responseOne", responseOne);
+              // console.log("responseTwo", responseTwo);
+              // console.log(responseFour);
+              const gameid = responseOne.data.id;
+              const gamename = responseOne.data.name;
+              const screenShot = responseThree.data;
+              const mp4url = responseFour.data.results[0].data["480"];
+              // stockage url trailer
+              const trailer = mp4url;
+              // console.log(trailer);
 
-            setGame_id(gameid);
-            setGame_name(gamename);
-            // console.log(gameid);
-            setData(responseOne.data);
-            // console.log("infosGame ==>", responseOne.data);
-            setGameLike(responseTwo.data);
-            // console.log("autreJeux ==>", responseTwo.data);
-
-            setIsLoading(false);
-          })
-        );
+              setGame_id(gameid);
+              setGame_name(gamename);
+              setScreenShot(screenShot);
+              setTrailer(trailer);
+              setData(responseOne.data);
+              // console.log("infosGame ==>", responseOne.data);
+              setGameLike(responseTwo.data);
+              // console.log("autreJeux ==>", responseTwo.data);
+              setIsLoading(false);
+            })
+          );
+        if (data === undefined) {
+        }
       } catch (error) {
-        console.log(error.message);
+        console.log("err", error.message);
       }
     };
 
     fetchData();
   }, []);
-
   useEffect(() => {
     const allReviews = async () => {
       try {
@@ -92,15 +108,31 @@ const Games = ({ API_KEY }) => {
               />
             )}
           </div>
-
-          <div className="middleCol">
-            <div>
+          <div className="rightCol">
+            <div className="rightCol2">
               <button>Add to collection</button>
               <Link to={`/games/reviews/${id}`}>
                 <button>Add reviews</button>
               </Link>
             </div>
-            <p>plateform</p>
+            <div className="rightCol1">
+              {screenShot.results.map((screen, index) => {
+                // console.log(screen.image);
+
+                return (
+                  <div key={index}>
+                    <img className="screenshot" src={screen.image} alt="" />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+        <section className="infos-bottom">
+          <div className="col-bottom-left">
+            {/* //className="middleCol" */}
+
+            <p>Plateform :</p>
             {data.platforms.map(({ platform: { name }, index }) => {
               //   console.log("name ->", name);
               return (
@@ -109,12 +141,11 @@ const Games = ({ API_KEY }) => {
                 </div>
               );
             })}
-
             <div>
-              <p>Released date</p>
+              <p>Released date :</p>
               <p>{data.released}</p>
             </div>
-            <p>Publisher</p>
+            <p>Publisher :</p>
             {data.publishers.map((publisher, index) => {
               //   console.log("publisher ->", publisher);
               return (
@@ -124,9 +155,9 @@ const Games = ({ API_KEY }) => {
               );
             })}
           </div>
-
-          <div className="rightCol">
-            <p>Genres</p>
+          <div className="col-bottom-middle">
+            {/*     //className="rightCol" */}
+            <p>Genres :</p>
             {data.genres.map((list, index) => {
               //   console.log(list);
               return (
@@ -135,7 +166,7 @@ const Games = ({ API_KEY }) => {
                 </div>
               );
             })}
-            <p>Developper</p>
+            <p>Developper :</p>
             {data.developers.map((developers, index) => {
               //   console.log("developers ->", developers);
               return (
@@ -144,35 +175,48 @@ const Games = ({ API_KEY }) => {
                 </div>
               );
             })}
-            <p>Age</p>
+            <p>Age :</p>
+          </div>
+
+          <div className="col-bottom-right">
+            <video controls muted autoPlay={true} preload="auto">
+              <source src={trailer} type="video/mp4" autoPlay={true} />
+            </video>
+
+            {/* <video src={trailer} type="video/mp4" autoPlay={true}></video> */}
           </div>
         </section>
-        <div className="bottomCol">
-          <h2>About</h2>
-          <span>{data.description_raw}</span>
-        </div>
+        <h2 className="h2-game">About</h2>
+        <span>{data.description_raw}</span>
 
         <div className="other_Games">
-          {gameLike.results.map((results, index) => {
-            // console.log("OtherGames ->", results.background_image);
-            return (
-              <div key={index}>
-                <div className="test">
-                  <img
-                    className="inOtherGame"
-                    src={results.background_image}
-                    alt="image jeux gta"
-                  />
-                  <p className="title">{results.name}</p>
+          <h2 className="h2-game">Game of the same serie</h2>
+          <div className="carrousel">
+            {gameLike.results.map((results, index) => {
+              // console.log("OtherGames ->", results);
+              // const id = results.id;
+              return (
+                <div key={index}>
+                  <div className="test" key={index}>
+                    <Link to={`/games/${results.id}`}>
+                      <img
+                        className="inOtherGame"
+                        src={results.background_image}
+                        alt="image jeux gta"
+                      />
+                    </Link>
+
+                    <p className="title">{results.name}</p>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
 
         <h1 className="start-reviews">Reviews</h1>
         {showReviews.data.map(
-          ({ title, reviews, author: { username, avatar_user } }, index) => {
+          ({ title, reviews, author: { username, avatar_user }, index }) => {
             return (
               <div className="allreviews">
                 <div className="titlereviews">
