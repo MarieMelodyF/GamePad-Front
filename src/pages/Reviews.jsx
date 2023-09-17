@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Reviews = ({ token }) => {
+  const navigate = useNavigate();
   // console.log(token);
 
   const { id } = useParams();
@@ -22,33 +24,44 @@ const Reviews = ({ token }) => {
       [name]: value,
     });
   };
+  let time = new Date().getTime();
+  let date = new Date(time);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      // if (formData.reviews.length < 10) {
-      //   setErrorMessage("You need at least 10 characters to publish a review.");
-      //   return;
-      // }
-      const response = await axios.post(
-        `http://localhost:3000/games/reviews`,
-        {
-          title: formData.title,
-          reviews: formData.reviews,
-          game_id: id,
-        },
-
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
+      if (formData.reviews.length < 10) {
+        setErrorMessage("You need at least 10 characters to publish a review.");
+        return;
+      } else if (formData.title.length < 5) {
+        setErrorMessage("You need at least 5 characters on title to publish");
+      } else {
+        const response = await axios.post(
+          `http://localhost:3000/games/reviews`,
+          {
+            title: formData.title,
+            reviews: formData.reviews,
+            game_id: id,
+            token: token,
+            date: date.toString(),
           },
-        }
-      );
-      console.log("Response:", response.data);
+
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log("Response:", response.data);
+      }
+      navigate(`/games/${id}`);
     } catch (error) {
-      console.error("Error:", error.response);
-      setErrorMessage("An error occurred while submitting the review.");
+      // console.error("Error:", error.response);
+      if (error.message === "Request failed with status code 400") {
+        // console.log("error.message", error.message);
+        setErrorMessage("You have already publish a reviews for this game 😉.");
+      } else setErrorMessage("You need to be logged.");
     }
   };
 

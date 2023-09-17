@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import img from "../images/notfound2.jpg";
 import { Link } from "react-router-dom";
 import Reviews from "./Reviews";
+import notfound from "../images/Sorry.png";
 
 const Games = ({ API_KEY }) => {
   const [data, setData] = useState("");
@@ -13,11 +14,12 @@ const Games = ({ API_KEY }) => {
   const [screenShot, setScreenShot] = useState();
   const [trailer, setTrailer] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [reviews, setReviews] = useState();
   const [showReviews, setShowReviews] = useState();
+  const [showErrorMessage, setShowErrorMessage] = useState();
   const { id } = useParams();
   // console.log(game_id);
   // console.log(game_name);
+  // console.log(showErrorMessage);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,10 +47,10 @@ const Games = ({ API_KEY }) => {
               const gameid = responseOne.data.id;
               const gamename = responseOne.data.name;
               const screenShot = responseThree.data;
-              const mp4url = responseFour.data.results[0].data["480"];
+              const mp4url = responseFour.data.results; //[0].data["480"];
               // stockage url trailer
               const trailer = mp4url;
-              // console.log(trailer);
+              // console.log(trailer); //[0].data["480"]);
 
               setGame_id(gameid);
               setGame_name(gamename);
@@ -65,6 +67,8 @@ const Games = ({ API_KEY }) => {
         }
       } catch (error) {
         console.log("err", error.message);
+        // setShowErrorMessage(error.response);
+        // console.log("log ShowError", showErrorMessage);
       }
     };
 
@@ -130,64 +134,91 @@ const Games = ({ API_KEY }) => {
         </section>
         <section className="infos-bottom">
           <div className="col-bottom-left">
-            {/* //className="middleCol" */}
+            <div>
+              <p>Plateform :</p>
+              {data.platforms.map(({ platform: { name }, index }) => {
+                //   console.log("name ->", name);
+                return (
+                  <div key={index}>
+                    <span>{name}</span>
+                  </div>
+                );
+              })}
+            </div>
 
-            <p>Plateform :</p>
-            {data.platforms.map(({ platform: { name }, index }) => {
-              //   console.log("name ->", name);
-              return (
-                <div key={index}>
-                  <span>{name}</span>
-                </div>
-              );
-            })}
             <div>
               <p>Released date :</p>
-              <p>{data.released}</p>
+              <span>{data.released}</span>
             </div>
-            <p>Publisher :</p>
-            {data.publishers.map((publisher, index) => {
-              //   console.log("publisher ->", publisher);
-              return (
-                <div key={index}>
-                  <span>{publisher.name}</span>
-                </div>
-              );
-            })}
+            <div>
+              <p>Publisher :</p>
+              {data.publishers.map((publisher, index) => {
+                //   console.log("publisher ->", publisher);
+                return (
+                  <div key={index}>
+                    <span>{publisher.name}</span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
           <div className="col-bottom-middle">
-            {/*     //className="rightCol" */}
-            <p>Genres :</p>
-            {data.genres.map((list, index) => {
-              //   console.log(list);
-              return (
-                <div key={index}>
-                  <span>{list.name}</span>
-                </div>
-              );
-            })}
-            <p>Developper :</p>
-            {data.developers.map((developers, index) => {
-              //   console.log("developers ->", developers);
-              return (
-                <div key={index}>
-                  <span>{developers.name}</span>
-                </div>
-              );
-            })}
-            <p>Age :</p>
+            <div>
+              <p>Genres :</p>
+              {data.genres.map((list, index) => {
+                //   console.log(list);
+                return (
+                  <div key={index}>
+                    <span>{list.name}</span>
+                  </div>
+                );
+              })}
+            </div>
+            <div>
+              <p>Developper :</p>
+              {data.developers.map((developers, index) => {
+                //   console.log("developers ->", developers);
+                return (
+                  <div key={index}>
+                    <span>{developers.name}</span>
+                  </div>
+                );
+              })}
+            </div>
+            <div>
+              <p>Age :</p>
+            </div>
           </div>
-
           <div className="col-bottom-right">
-            <video controls muted autoPlay={true} preload="auto">
-              <source src={trailer} type="video/mp4" autoPlay={true} />
-            </video>
-
-            {/* <video src={trailer} type="video/mp4" autoPlay={true}></video> */}
+            {trailer.length <= 0 ? (
+              <div>
+                <img
+                  className="notfound"
+                  src={notfound}
+                  alt="trailer not found"
+                />
+              </div>
+            ) : (
+              <video
+                className="trailer"
+                controls
+                muted
+                autoPlay={true}
+                preload="auto"
+              >
+                <source
+                  src={trailer[0].data["480"]}
+                  type="video/mp4"
+                  autoPlay={true}
+                />
+              </video>
+            )}
           </div>
         </section>
         <h2 className="h2-game">About</h2>
-        <span>{data.description_raw}</span>
+        <div className="about">
+          <span>{data.description_raw}</span>
+        </div>
 
         <div className="other_Games">
           <h2 className="h2-game">Game of the same serie</h2>

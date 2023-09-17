@@ -1,8 +1,11 @@
 import React from "react";
 import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ token, setToken }) => {
+  const navigate = useNavigate();
+
   return (
     <header>
       <div className="Header_container">
@@ -17,6 +20,7 @@ const Header = ({ token, setToken }) => {
               className="headerBut"
               onClick={() => {
                 setToken("");
+                navigate("/");
               }}
             >
               Log Out
@@ -24,7 +28,9 @@ const Header = ({ token, setToken }) => {
           </div>
         ) : (
           <div className="headerButton">
-            <button> My collection</button>
+            <Link to="/favorites">
+              <button> My collection</button>
+            </Link>
             <Link className="headerButton" to="/user/login">
               <button> Login</button>
             </Link>

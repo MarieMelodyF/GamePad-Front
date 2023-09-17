@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Cookies from "js-cookie";
 import Reviews from "./pages/Reviews";
+import MyReviews from "./pages/MyReviews";
 
 function App() {
   const [token, setToken] = useState(Cookies.get("token"));
@@ -49,6 +50,13 @@ function App() {
             path="/games/reviews/:id"
             element={
               <Reviews API_KEY={API_KEY} token={token} setToken={setToken} />
+            }
+          />
+
+          <Route
+            path="/favorites"
+            element={
+              <MyReviews API_KEY={API_KEY} token={token} setToken={setToken} />
             }
           />
         </Routes>

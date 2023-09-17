@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logo from "../images/smallLogo.png";
 
 const Signup = ({ token, setToken }) => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -72,6 +74,7 @@ const Signup = ({ token, setToken }) => {
           alert("Please confirme your password");
         }
       }
+      navigate(`/`);
     } catch (error) {
       //   console.log("==>", error.message);
       if (error.message.data === "Email already exist ! Use your account 🚀") {
