@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Reviews from "./Reviews";
 import notfound from "../images/Sorry.png";
 
-const Games = ({ API_KEY }) => {
+const Games = () => {
   const [data, setData] = useState("");
   const [gameLike, setGameLike] = useState("");
   const [game_id, setGame_id] = useState("");
@@ -23,15 +23,20 @@ const Games = ({ API_KEY }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let one = `https://api.rawg.io/api/games/${id}?key=${API_KEY}`;
-      let two = `https://api.rawg.io/api/games/${id}/game-series?key=${API_KEY}`;
-      let three = `https://api.rawg.io/api/games/${id}/screenshots?key=${API_KEY}`;
-      let four = `https://api.rawg.io/api/games/${id}/movies?key=${API_KEY}`;
+      // let one = `https://api.rawg.io/api/games/${id}?key=${API_KEY}`;
+      // let two = `https://api.rawg.io/api/games/${id}/game-series?key=${API_KEY}`;
+      // let three = `https://api.rawg.io/api/games/${id}/screenshots?key=${API_KEY}`;
+      // let four = `https://api.rawg.io/api/games/${id}/movies?key=${API_KEY}`;
 
+      let one = `http://localhost:3000/games/${id}`;
+      let two = `http://localhost:3000/game/${id}/similar`;
+      let three = `http://localhost:3000/game/${id}/screenshots`;
+      let four = `http://localhost:3000/game/${id}/trailer`;
       const requestOne = axios.get(one);
       const requestTwo = axios.get(two);
       const requestThree = axios.get(three);
       const requestFour = axios.get(four);
+
       try {
         await axios
           .all([requestOne, requestTwo, requestThree, requestFour])
@@ -73,7 +78,7 @@ const Games = ({ API_KEY }) => {
     };
 
     fetchData();
-  }, []);
+  }, [id]);
   useEffect(() => {
     const allReviews = async () => {
       try {
@@ -84,13 +89,16 @@ const Games = ({ API_KEY }) => {
           ...reviews,
         }));
         setShowReviews(response);
-        // console.log("responseallreviews", showReviews.data[0].title);
+        // console.log("responseallreviews", showReviews.data[0].date);
+        // console.log(showReviews);
       } catch (error) {}
     };
     allReviews();
     // console.log("useeffectgamereview");
   }, []);
-
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return isLoading ? (
     <p> En chargement...</p>
   ) : (
@@ -229,7 +237,11 @@ const Games = ({ API_KEY }) => {
               return (
                 <div key={index}>
                   <div className="test" key={index}>
-                    <Link to={`/games/${results.id}`}>
+                    <Link
+                      to={`/games/${results.id}`}
+                      key={results.id}
+                      onClick={scrollToTop}
+                    >
                       <img
                         className="inOtherGame"
                         src={results.background_image}
@@ -247,7 +259,13 @@ const Games = ({ API_KEY }) => {
 
         <h1 className="start-reviews">Reviews</h1>
         {showReviews.data.map(
-          ({ title, reviews, author: { username, avatar_user }, index }) => {
+          ({
+            title,
+            reviews,
+            date,
+            author: { username, avatar_user },
+            index,
+          }) => {
             return (
               <div className="allreviews">
                 <div className="titlereviews">
@@ -259,12 +277,16 @@ const Games = ({ API_KEY }) => {
                 </div>
 
                 <div className="user">
-                  <img
-                    className="img-user"
-                    src={avatar_user.secure_url}
-                    alt="avatar"
-                  />
-                  <p>{username}</p>
+                  <div className="user">
+                    <img
+                      className="img-user"
+                      src={avatar_user.secure_url}
+                      alt="avatar"
+                    />
+                    <p>{username}</p>
+                  </div>
+
+                  <span>{date.slice(4, 15)}</span>
                 </div>
               </div>
             );

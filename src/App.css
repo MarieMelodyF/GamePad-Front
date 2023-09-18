@@ -20,11 +20,13 @@ p {
   line-height: 20px;
 }
 span {
+  color: lightgray;
   line-height: 20px;
 }
 
 h1 {
   font-size: 30px;
+  margin-bottom: 10px;
 }
 
 h2 {
@@ -46,10 +48,6 @@ h3 {
   width: 150px;
   background-color: rgba(211, 211, 211, 0.175);
   position: absolute;
-}
-
-span {
-  color: lightgray;
 }
 
 /* ------------------- */
@@ -218,10 +216,11 @@ i {
   padding: 5px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
   align-items: center;
-  gap: 5px;
-  height: 400px;
+  justify-content: space-around;
+  gap: 10px;
+  /* background-color: rgb(51, 89, 159); */
+  flex: 1;
 }
 
 .rightCol {
@@ -232,6 +231,8 @@ i {
   display: flex;
   justify-content: center;
   gap: 30px;
+  height: 80px;
+  /* background-color: rgb(120, 140, 177); */
 }
 .rightCol2 button {
   border-radius: 10px;
@@ -267,10 +268,11 @@ i {
 }
 
 .imgGame {
-  height: 90%;
+  height: 420px;
   width: 700px;
   object-fit: cover;
   border-radius: 10px;
+  /* background-color: rgb(9, 139, 0); */
 }
 
 .about {
@@ -504,8 +506,10 @@ label {
 
 .user {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 10px;
+  /* background-color: tomato; */
 }
 .img-user {
   height: 60px;

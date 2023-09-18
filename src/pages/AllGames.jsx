@@ -25,7 +25,7 @@ const AllGames = () => {
         const name = search || "";
         // console.log("name search =>", name);
         const response = await axios.get(
-          `https://api.rawg.io/api/games?key=${API_KEY}&search=${name}&page_size=${page_size}&page=${page}`
+          `http://localhost:3000/home?&search=${name}&page_size=${page_size}&page=${page}`
         );
         count = response.data.count;
 
@@ -53,7 +53,7 @@ const AllGames = () => {
               className="pageButton2"
               onClick={() => {
                 setPage(page - 1);
-                // console.log(page);
+                console.log(page);
               }}
             >
               Previous

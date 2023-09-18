@@ -32,7 +32,7 @@ function App() {
       <Router>
         <Header token={token} setToken={setToken} />
         <Routes>
-          <Route path="/" element={<AllGames />} />
+          <Route path="/home" element={<AllGames />} />
           <Route path="/games/:id" element={<Games API_KEY={API_KEY} />} />
           <Route
             path="/user/login"

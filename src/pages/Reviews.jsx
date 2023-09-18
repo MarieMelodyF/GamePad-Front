@@ -55,7 +55,7 @@ const Reviews = ({ token }) => {
         );
         console.log("Response:", response.data);
       }
-      navigate(`/games/${id}`);
+      // navigate(`/games/${id}`);
     } catch (error) {
       // console.error("Error:", error.response);
       if (error.message === "Request failed with status code 400") {
