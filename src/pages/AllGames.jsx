@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import img from "../images/notfound2.jpg";
+import Loader from "../components/Loader";
 // import Cookies from "js-cookie";
 
 const AllGames = () => {
@@ -42,7 +43,7 @@ const AllGames = () => {
   }, [page, limit, search]);
 
   return isLoading ? (
-    <p> En chargement...</p>
+    <Loader />
   ) : (
     <>
       {/* button next/previous & search bar */}

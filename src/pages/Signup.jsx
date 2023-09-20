@@ -74,7 +74,7 @@ const Signup = ({ token, setToken }) => {
           alert("Please confirme your password");
         }
       }
-      navigate(`/`);
+      navigate(`/home`);
     } catch (error) {
       //   console.log("==>", error.message);
       if (error.message.data === "Email already exist ! Use your account 🚀") {

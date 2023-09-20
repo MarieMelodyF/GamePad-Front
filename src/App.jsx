@@ -10,7 +10,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Cookies from "js-cookie";
 import Reviews from "./pages/Reviews";
-import MyReviews from "./pages/MyReviews";
+import MyCollection from "./pages/MyCollection";
 
 function App() {
   const [token, setToken] = useState(Cookies.get("token"));
@@ -33,7 +33,10 @@ function App() {
         <Header token={token} setToken={setToken} />
         <Routes>
           <Route path="/home" element={<AllGames />} />
-          <Route path="/games/:id" element={<Games API_KEY={API_KEY} />} />
+          <Route
+            path="/games/:id"
+            element={<Games API_KEY={API_KEY} token={token} />}
+          />
           <Route
             path="/user/login"
             element={
@@ -54,9 +57,13 @@ function App() {
           />
 
           <Route
-            path="/favorites"
+            path="/allfavorites"
             element={
-              <MyReviews API_KEY={API_KEY} token={token} setToken={setToken} />
+              <MyCollection
+                API_KEY={API_KEY}
+                token={token}
+                setToken={setToken}
+              />
             }
           />
         </Routes>

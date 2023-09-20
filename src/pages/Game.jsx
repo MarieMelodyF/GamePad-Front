@@ -2,11 +2,14 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import img from "../images/notfound2.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Reviews from "./Reviews";
 import notfound from "../images/Sorry.png";
+import Loader from "../components/Loader";
 
-const Games = () => {
+const Games = ({ token }) => {
+  const navigate = useNavigate();
+
   const [data, setData] = useState("");
   const [gameLike, setGameLike] = useState("");
   const [game_id, setGame_id] = useState("");
@@ -15,13 +18,31 @@ const Games = () => {
   const [trailer, setTrailer] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [showReviews, setShowReviews] = useState();
-  const [showErrorMessage, setShowErrorMessage] = useState();
+  const [inFavorites, setInFavorites] = useState(false);
   const { id } = useParams();
-  // console.log(game_id);
-  // console.log(game_name);
-  // console.log(showErrorMessage);
 
   useEffect(() => {
+    const favoritesList = async () => {
+      try {
+        if (token) {
+          const response = await axios.post(
+            `http://localhost:3000/allfavorites`,
+            {
+              token: token,
+            }
+          );
+          console.log("res", response);
+          // response.data.some((element) => element.id === data.id) &&
+          setInFavorites(true);
+        } else {
+          return null;
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    // AFFICHER LES INFOS DU JEUX
     const fetchData = async () => {
       // let one = `https://api.rawg.io/api/games/${id}?key=${API_KEY}`;
       // let two = `https://api.rawg.io/api/games/${id}/game-series?key=${API_KEY}`;
@@ -72,13 +93,50 @@ const Games = () => {
         }
       } catch (error) {
         console.log("err", error.message);
-        // setShowErrorMessage(error.response);
-        // console.log("log ShowError", showErrorMessage);
       }
     };
 
     fetchData();
+    favoritesList();
   }, [id]);
+
+  // ADD FAV
+  const addGame = () => {
+    if (token) {
+      console.log(token);
+      const favGame = async () => {
+        try {
+          const favorite = {
+            title: data.name,
+            id: data.id,
+            image: data.background_image,
+          };
+          console.log("favorite", favorite);
+          const response = await axios.post(`http://localhost:3000/favorite`, {
+            token: token,
+            favorite: favorite,
+          });
+          console.log("responseAddGame", response);
+        } catch (error) {
+          console.log("error add game", error.response);
+        }
+      };
+      favGame();
+    } else {
+      navigate("/signin");
+    }
+  };
+
+  // const deleteFav = async (id) => {
+  //   const gameId = id;
+  //   await axios.put(`http://localhost:3000/deletefavorite`, {
+  //     token,
+  //     gameId,
+  //   });
+  //   setInFavorites(false);
+  // };
+
+  // AFFICHER LES REVIEWS
   useEffect(() => {
     const allReviews = async () => {
       try {
@@ -90,17 +148,20 @@ const Games = () => {
         }));
         setShowReviews(response);
         // console.log("responseallreviews", showReviews.data[0].date);
-        // console.log(showReviews);
-      } catch (error) {}
+        // console.log("->", showReviews);
+      } catch (error) {
+        console.log("err", error.response);
+      }
     };
     allReviews();
     // console.log("useeffectgamereview");
   }, []);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   return isLoading ? (
-    <p> En chargement...</p>
+    <Loader />
   ) : (
     <>
       <main className="container">
@@ -122,7 +183,7 @@ const Games = () => {
           </div>
           <div className="rightCol">
             <div className="rightCol2">
-              <button>Add to collection</button>
+              <button onClick={addGame}>Add to collection</button>
               <Link to={`/games/reviews/${id}`}>
                 <button>Add reviews</button>
               </Link>
@@ -266,16 +327,15 @@ const Games = () => {
             author: { username, avatar_user },
             index,
           }) => {
+            // console.log(title);
             return (
               <div className="allreviews">
                 <div className="titlereviews">
                   <p>{title}</p>
                 </div>
-
                 <div className="reviews">
                   <p>{reviews}</p>
                 </div>
-
                 <div className="user">
                   <div className="user">
                     <img
@@ -285,7 +345,6 @@ const Games = () => {
                     />
                     <p>{username}</p>
                   </div>
-
                   <span>{date.slice(4, 15)}</span>
                 </div>
               </div>

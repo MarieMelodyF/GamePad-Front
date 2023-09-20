@@ -15,7 +15,9 @@ const Header = ({ token, setToken }) => {
 
         {token ? (
           <div className="headerButton">
-            <button> My collection</button>
+            <Link to="/allfavorites">
+              <button> My collection</button>
+            </Link>
             <button
               className="headerBut"
               onClick={() => {
@@ -28,7 +30,7 @@ const Header = ({ token, setToken }) => {
           </div>
         ) : (
           <div className="headerButton">
-            <Link to="/favorites">
+            <Link to="/allfavorites">
               <button> My collection</button>
             </Link>
             <Link className="headerButton" to="/user/login">

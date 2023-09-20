@@ -48,7 +48,7 @@ const Login = ({ setToken }) => {
 
               // console.log("log connexion", response.data);
               // console.log("data.token", response.data.token);
-              navigate("/");
+              navigate("/home");
               setToken(response.data.token);
               // console.log("login", response.data.token);
               // console.log(response.data.token);
@@ -95,8 +95,8 @@ const Login = ({ setToken }) => {
             />
             <input className="input" type="submit" value={"connexion"} />
           </div>
-          <Link to="/user/signup">
-            <p>Don't have an account yet ? </p>
+          <Link className="login" to="/user/signup">
+            <p className="login">Don't have an account yet ? </p>
           </Link>
         </form>
       </div>

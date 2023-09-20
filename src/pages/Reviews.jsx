@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Reviews = ({ token }) => {
   const navigate = useNavigate();
@@ -43,7 +44,6 @@ const Reviews = ({ token }) => {
             title: formData.title,
             reviews: formData.reviews,
             game_id: id,
-            token: token,
             date: date.toString(),
           },
 
@@ -55,13 +55,14 @@ const Reviews = ({ token }) => {
         );
         console.log("Response:", response.data);
       }
-      // navigate(`/games/${id}`);
+      navigate(`/games/${id}`);
     } catch (error) {
       // console.error("Error:", error.response);
       if (error.message === "Request failed with status code 400") {
-        // console.log("error.message", error.message);
+        console.log("error.message", error.response);
         setErrorMessage("You have already publish a reviews for this game 😉.");
-      } else setErrorMessage("You need to be logged.");
+      } else setErrorMessage(`You need to be logged. Go to Login`);
+      console.log(error);
     }
   };
 
