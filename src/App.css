@@ -49,7 +49,8 @@ h4 {
 h3 {
   color: white;
   text-align: center;
-  width: 200px;
+  font-size: 15px;
+  width: 300px;
   margin-left: 5px;
 }
 
@@ -75,32 +76,23 @@ header {
 
 .headerButton {
   height: 40px;
-  width: 20px;
   display: flex;
-  justify-content: space-between;
+  width: 300px;
+  justify-content: center;
+  align-items: center;
   gap: 100px;
   /* border: 1px solid blue; */
 }
 
-div .headerBut {
-  width: 250px;
-}
-
 .headerButton button {
-  border-radius: 10px;
   cursor: pointer;
-  padding: 0 20px;
-  border: none;
+  height: 40px;
+  width: 100px;
+  border-radius: 10px;
+  color: white;
   font-weight: bold;
-  transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s,
-    -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
-  background: linear-gradient(
-    to right,
-    rgba(255, 0, 0, 0.84) 0%,
-    rgb(236, 31, 68) 50%,
-    rgba(226, 57, 93, 0.571) 100%
-  );
-  color: #fff;
+  background: linear-gradient(to left, #7f1d1d 0%, #991b1b 50%, #dc2626 100%);
+  border-radius: 10px;
 }
 
 /* ------------------- */
@@ -215,7 +207,7 @@ i {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 20px;
+  height: 25px;
   width: 35px;
   background-color: #202020;
   border: 1px solid #e80505;
@@ -234,7 +226,7 @@ i {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 20px;
+  height: 25px;
   width: 25px;
   background-color: #202020;
   border: 1px solid #68bc46;
@@ -250,9 +242,9 @@ i {
   height: 50px;
 }
 .card {
-  margin-top: -65px;
+  margin-top: -75px;
   width: 240px;
-  height: 65px;
+  height: 74px;
   background-color: #3f3f3fcb;
   position: absolute;
   border-radius: 0 0 10px 10px;
@@ -267,12 +259,93 @@ i {
   font-size: 13px;
 }
 
+.to-top-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 20px;
+  height: 40px;
+  width: 100px;
+  border-radius: 10px;
+  color: white;
+  background: linear-gradient(to left, #7f1d1d 0%, #991b1b 50%, #dc2626 100%);
+}
 /* ------------------- */
 /* ------------------- */
 /* --------GAME------- */
 /* ------------------- */
 /* ------------------- */
 
+.rates {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 230px;
+  margin-top: 5px;
+}
+
+.rates span {
+  display: flex;
+  width: 130px;
+  justify-content: center;
+  position: absolute;
+  margin-top: -10px;
+  margin-left: -155px;
+  font-weight: bold;
+}
+.count {
+  display: flex;
+  flex-direction: column;
+  /* margin-left: 10px; */
+}
+.circle {
+  height: 35px;
+  width: 150px;
+  border-radius: 10px;
+  background-color: rgba(4, 162, 4, 0.797);
+  position: relative;
+}
+.circle2 {
+  height: 35px;
+  width: 150px;
+  border-radius: 10px;
+  background-color: rgba(74, 74, 245, 0.756);
+  position: relative;
+  /* border: 1px solid red; */
+}
+
+.circle3 {
+  height: 35px;
+  width: 150px;
+  border-radius: 10px;
+  background-color: rgba(255, 166, 0, 0.86);
+  position: relative;
+
+  /* border: 1px solid red; */
+}
+.circle4 {
+  height: 35px;
+  width: 150px;
+  border-radius: 10px;
+  background-color: rgba(255, 0, 0, 0.956);
+  position: relative;
+
+  /* border: 1px solid red; */
+}
+.button-game {
+  cursor: pointer;
+  height: 30px;
+  width: 80px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(to left, #7f1d1d 0%, #991b1b 50%, #dc2626 100%);
+}
+
+.button-game:hover {
+  background: linear-gradient(to left, #7f1d1d 0%, #991b1b 50%, #7f1d1d 100%);
+}
 .infos {
   display: flex;
   gap: 10px;
@@ -287,6 +360,7 @@ i {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  /* background-color: rebeccapurple; */
   flex: 2;
 }
 
@@ -298,17 +372,19 @@ i {
   justify-content: space-around;
   gap: 10px;
   flex: 1;
+  /* background-color: red; */
 }
 
-.rightCol {
+/* .rightCol {
   display: flex;
   flex-direction: column;
-}
+} */
 .rightCol2 {
   display: flex;
   justify-content: center;
   gap: 30px;
   height: 80px;
+  /* background-color: rgb(140, 123, 157); */
 }
 .rightCol2 button {
   border-radius: 10px;
@@ -335,6 +411,10 @@ i {
   width: 100%;
   height: 400px;
 }
+
+.infos-bottom p {
+  font-weight: bold;
+}
 .trailer {
   height: 380px;
   border: 1px solid rgb(92, 91, 91);
@@ -345,6 +425,7 @@ i {
   width: 700px;
   object-fit: cover;
   border-radius: 10px;
+  margin-top: 40px;
 }
 
 .about {
@@ -355,6 +436,11 @@ i {
   width: 200px;
   object-fit: cover;
   border-radius: 10px;
+}
+.inOtherGame:hover {
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 15px rgb(98, 97, 97);
+  opacity: 0.9;
 }
 
 .other_Games {
@@ -376,11 +462,14 @@ i {
 }
 .title {
   position: absolute;
-  top: 200px;
-  left: 10px;
-  width: 100px;
-  background-color: rgba(211, 211, 211, 0.175);
+  top: 230px;
+  /* left: 10px; */
+  height: 50px;
+  width: 100%;
+  background-color: rgba(38, 38, 38, 0.668);
   overflow-y: hidden;
+  text-align: center;
+  padding-top: 5px;
 }
 .screenshot {
   height: 130px;
@@ -388,6 +477,7 @@ i {
   object-fit: cover;
   border-radius: 10px;
 }
+
 .notfound {
   height: 350px;
 }
@@ -564,12 +654,14 @@ label {
   background-color: #313235;
   margin-bottom: 50px;
   border-radius: 10px;
+  color: white;
 }
 
 .titlereviews {
   text-decoration: underline;
   font-size: 18px;
   padding: 10px;
+  color: white;
 }
 .reviews p {
   /* background-color: purple; */
@@ -647,4 +739,31 @@ label {
   width: 30px;
   background-color: red;
   color: white;
+}
+
+/* ------------------- */
+/* ------------------- */
+/* ------FOOTER------- */
+/* ------------------- */
+/* ------------------- */
+
+.footer {
+  margin-top: 70px;
+  display: flex;
+  background-color: #2a2a2a;
+  justify-content: space-around;
+}
+.logo-footer img {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding-bottom: 10px;
+}
+
+.byme {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  /* border: 1px solid red; */
 }

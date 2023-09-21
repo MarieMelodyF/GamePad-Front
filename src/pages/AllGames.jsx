@@ -26,7 +26,6 @@ const AllGames = () => {
   }
 
   useEffect(() => {
-    const API_KEY = "899db466e6d64907bb6dbc7dd3670574";
     const page_size = 100;
 
     let count = "";
@@ -115,10 +114,10 @@ const AllGames = () => {
         <div className="all-filters">
           <p
             onClick={() => {
-              navigate("/home");
+              setOrdering("");
             }}
           >
-            none filter
+            ✖️ Remove filters
           </p>
           <p
             onClick={() => {
@@ -197,6 +196,9 @@ const AllGames = () => {
             );
           }
         )}
+        <div className="to-top-button" onClick={scrollToTop}>
+          Go to top
+        </div>
       </main>
     </>
   );

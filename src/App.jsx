@@ -11,6 +11,7 @@ import Signup from "./pages/Signup";
 import Cookies from "js-cookie";
 import Reviews from "./pages/Reviews";
 import MyCollection from "./pages/MyCollection";
+import Footer from "./components/Footer";
 
 function App() {
   const [token, setToken] = useState(Cookies.get("token"));
@@ -67,6 +68,7 @@ function App() {
             }
           />
         </Routes>
+        <Footer token={token} setToken={setToken} />
       </Router>
     </>
   );

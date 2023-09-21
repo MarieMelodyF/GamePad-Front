@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import img from "../images/notfound2.jpg";
 import { Link, useNavigate } from "react-router-dom";
@@ -21,6 +21,9 @@ const Games = ({ token }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [showReviews, setShowReviews] = useState();
   const [inFavorites, setInFavorites] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
+  const [screenImg, setscreenImg] = useState([]);
   const { id } = useParams();
 
   // console.log("showreviews", showReviews);
@@ -71,7 +74,9 @@ const Games = ({ token }) => {
               const gamename = responseOne.data.name;
               const screenShot = responseThree.data;
               const mp4url = responseFour.data.results; //[0].data["480"];
+              // console.log(game_id);
               // stockage url trailer
+              // console.log(screenShot.results[0].image);
               const trailer = mp4url;
               // console.log(trailer); //[0].data["480"]);
 
@@ -133,7 +138,7 @@ const Games = ({ token }) => {
 
         setShowReviews(response);
 
-        // console.log("responseallreviews", showReviews.data[0].date);
+        console.log("responseallreviews", showReviews.data);
       } catch (error) {
         console.log("err", error.response);
       }
@@ -144,6 +149,8 @@ const Games = ({ token }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  const img = notfound;
   return isLoading ? (
     <Loader />
   ) : (
@@ -158,16 +165,79 @@ const Games = ({ token }) => {
             {data.background_image === null ? (
               <img className="imgGame" src={img} alt="notfound" />
             ) : (
-              <img
-                className="imgGame"
-                src={data.background_image}
-                alt="image du jeu"
-              />
+              <div>
+                <img
+                  className="imgGame"
+                  src={data.background_image}
+                  alt="image du jeu"
+                />
+              </div>
             )}
+            {data.ratings.map(({ title, count, percent }, index) => {
+              // console.log(title);
+
+              return (
+                <>
+                  {title === "exceptional" ? (
+                    <>
+                      <div className="rates">
+                        <div>
+                          <div className="circle"></div>
+                        </div>
+                        <div>
+                          <span>{title}</span>
+                        </div>
+                        <div className="count">
+                          <p>{count}</p>
+                        </div>
+                      </div>
+                    </>
+                  ) : title === "recommended" ? (
+                    <div className="rates">
+                      <div>
+                        <div className="circle2"></div>
+                      </div>
+                      <div>
+                        <span>{title}</span>
+                      </div>
+                      <div>
+                        <p>{count}</p>
+                      </div>
+                    </div>
+                  ) : title === "meh" ? (
+                    <div className="rates">
+                      <div>
+                        <div className="circle3"></div>
+                      </div>
+                      <div>
+                        <span>{title}</span>
+                      </div>
+                      <div>
+                        <p>{count}</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="rates">
+                      <div>
+                        <div className="circle4"></div>
+                      </div>
+                      <div>
+                        <span>{title}</span>
+                      </div>
+                      <div>
+                        <p>{count}</p>
+                      </div>
+                    </div>
+                  )}
+                </>
+              );
+            })}
           </div>
+
           <div className="rightCol">
             <div className="rightCol2">
               <button
+                className="button-game"
                 onClick={() => {
                   addGame();
                   saved();
@@ -177,9 +247,10 @@ const Games = ({ token }) => {
                 Add to collection
               </button>
               <Link to={`/games/reviews/${id}`}>
-                <button>Add reviews</button>
+                <button className="button-game">Add reviews</button>
               </Link>
             </div>
+
             <div className="rightCol1">
               {screenShot.results.map((screen, index) => {
                 return (
@@ -242,6 +313,11 @@ const Games = ({ token }) => {
             </div>
             <div>
               <p>Age :</p>
+              {data.esrb_rating === null ? (
+                <span> Unknown</span>
+              ) : (
+                <p>{data.esrb_rating.name}</p>
+              )}
             </div>
           </div>
           <div className="col-bottom-right">
@@ -310,26 +386,34 @@ const Games = ({ token }) => {
             { title, reviews, date, author: { username, avatar_user } },
             index
           ) => {
-            // console.log(title);
+            console.log("-->", showReviews.data);
             return (
               <div className="allreviews" key={index}>
-                <div className="titlereviews">
-                  <p>{title}</p>
-                </div>
-                <div className="reviews">
-                  <p>{reviews}</p>
-                </div>
-                <div className="user">
-                  <div className="user">
-                    <img
-                      className="img-user"
-                      src={avatar_user.secure_url}
-                      alt="avatar"
-                    />
-                    <p>{username}</p>
-                  </div>
-                  <span>{date.slice(4, 15)}</span>
-                </div>
+                {showReviews.data.length === 0 ? (
+                  <>
+                    <div>No reviews register</div>
+                  </>
+                ) : (
+                  <>
+                    <div className="titlereviews">
+                      <p>{title}</p>
+                    </div>
+                    <div className="reviews">
+                      <p>{reviews}</p>
+                    </div>
+                    <div className="user">
+                      <div className="user">
+                        <img
+                          className="img-user"
+                          src={avatar_user.secure_url}
+                          alt="avatar"
+                        />
+                        <p>{username}</p>
+                      </div>
+                      <span>{date.slice(4, 15)}</span>
+                    </div>
+                  </>
+                )}
               </div>
             );
           }
