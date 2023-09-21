@@ -67,11 +67,9 @@ const Signup = ({ token, setToken }) => {
           "http://localhost:3000/user/signup",
           formData
         );
-        console.log("res.data =>", response.data);
-        //   console.log("data2 =>", data);
+        // console.log("res.data =>", response.data);
         const token = response.data.token;
         // setAvatar_user(response.data.avatar_user.secure_url);
-        // navigate(`/home`);
         setToken(token);
         navigate("/home");
       }
@@ -165,7 +163,7 @@ const Signup = ({ token, setToken }) => {
           <div className="right-form">
             <input
               onChange={(event) => {
-                console.log(event.target.files[0]);
+                // console.log(event.target.files[0]);
                 setAvatar_user(event.target.files[0]);
               }}
               type="file"

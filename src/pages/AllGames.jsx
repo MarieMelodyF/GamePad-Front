@@ -41,7 +41,7 @@ const AllGames = () => {
         );
         count = response.data.count;
 
-        // console.log(response.data);
+        console.log("response.data", response.data);
         setData(response.data);
         setIsLoading(false);
         setCount(count);
@@ -160,28 +160,43 @@ const AllGames = () => {
 
       <main className="container home">
         {/* map sur results pour trouver les infos à recupérer */}
-        {data.results.map(({ background_image, name, id }) => {
-          // console.log(background_image);
+        {data.results.map(
+          ({ background_image, name, id, metacritic, rating }) => {
+            // console.log(background_image);
 
-          return (
-            <div key={id}>
-              <div>
-                <Link to={`/games/${id}`} onClick={scrollToTop}>
-                  {background_image === null ? (
-                    <img className="imgGames" src={img} alt="notfound" />
-                  ) : (
-                    <img
-                      className="imgGames"
-                      src={background_image}
-                      alt="image du jeu"
-                    />
-                  )}
-                </Link>
-                <h3>{name}</h3>
+            return (
+              <div key={id}>
+                <div>
+                  <Link to={`/games/${id}`} onClick={scrollToTop}>
+                    {background_image === null ? (
+                      <img className="imgGames" src={img} alt="notfound" />
+                    ) : (
+                      <img
+                        className="imgGames"
+                        src={background_image}
+                        alt="image du jeu"
+                      />
+                    )}
+                  </Link>
+                  <div className="card">
+                    <h3>{name}</h3>
+                    <div className="card-game">
+                      <div className="rate">
+                        <p>rate</p>
+                        <p className="rating">{rating}</p>
+                      </div>
+                      <div className="meta">
+                        <p>meta</p>
+                        <p className="metacritic">{metacritic}</p>
+                      </div>
+                    </div>
+                    <div></div>
+                  </div>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          }
+        )}
       </main>
     </>
   );

@@ -35,7 +35,6 @@ const Games = ({ token }) => {
             }
           );
           // console.log("res", response);
-          // response.data.some((element) => element.id === data.id) &&
           setInFavorites(true);
         } else {
           return null;
@@ -47,11 +46,6 @@ const Games = ({ token }) => {
 
     // AFFICHER LES INFOS DU JEUX
     const fetchData = async () => {
-      // let one = `https://api.rawg.io/api/games/${id}?key=${API_KEY}`;
-      // let two = `https://api.rawg.io/api/games/${id}/game-series?key=${API_KEY}`;
-      // let three = `https://api.rawg.io/api/games/${id}/screenshots?key=${API_KEY}`;
-      // let four = `https://api.rawg.io/api/games/${id}/movies?key=${API_KEY}`;
-
       let one = `http://localhost:3000/games/${id}`;
       let two = `http://localhost:3000/game/${id}/similar`;
       let three = `http://localhost:3000/game/${id}/screenshots`;
@@ -130,35 +124,21 @@ const Games = ({ token }) => {
     }
   };
 
-  // const deleteFav = async (id) => {
-  //   const gameId = id;
-  //   await axios.put(`http://localhost:3000/deletefavorite`, {
-  //     token,
-  //     gameId,
-  //   });
-  //   setInFavorites(false);
-  // };
-
-  // AFFICHER LES REVIEWS
   useEffect(() => {
     const allReviews = async () => {
       try {
         const response = await axios.get(
           `http://localhost:3000/allreviews/${id}`
         );
-        // response.data.map((reviews) => ({
-        //   ...reviews,
-        // }));
+
         setShowReviews(response);
 
         // console.log("responseallreviews", showReviews.data[0].date);
-        // console.log("->", showReviews);
       } catch (error) {
         console.log("err", error.response);
       }
     };
     allReviews();
-    // console.log("useeffectgamereview");
   }, []);
 
   const scrollToTop = () => {
@@ -202,8 +182,6 @@ const Games = ({ token }) => {
             </div>
             <div className="rightCol1">
               {screenShot.results.map((screen, index) => {
-                // console.log(screen.image);
-
                 return (
                   <div key={index}>
                     <img className="screenshot" src={screen.image} alt="" />
@@ -218,7 +196,6 @@ const Games = ({ token }) => {
             <div>
               <p>Plateform :</p>
               {data.platforms.map(({ platform: { name } }, index) => {
-                //   console.log("name ->", name);
                 return (
                   <div key={index}>
                     <span>{name}</span>
@@ -234,7 +211,6 @@ const Games = ({ token }) => {
             <div>
               <p>Publisher :</p>
               {data.publishers.map((publisher, index) => {
-                //   console.log("publisher ->", publisher);
                 return (
                   <div key={index}>
                     <span>{publisher.name}</span>
@@ -247,7 +223,6 @@ const Games = ({ token }) => {
             <div>
               <p>Genres :</p>
               {data.genres.map((list, index) => {
-                //   console.log(list);
                 return (
                   <div key={index}>
                     <span>{list.name}</span>
@@ -258,7 +233,6 @@ const Games = ({ token }) => {
             <div>
               <p>Developper :</p>
               {data.developers.map((developers, index) => {
-                //   console.log("developers ->", developers);
                 return (
                   <div key={index}>
                     <span>{developers.name}</span>
