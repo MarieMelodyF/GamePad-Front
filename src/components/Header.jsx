@@ -9,20 +9,20 @@ const Header = ({ token, setToken }) => {
   return (
     <header>
       <div className="Header_container">
-        <Link className="Header_container" to="/home">
+        <Link className="Header_container" to="/home?page=1">
           <img src={logo} alt="logo game pad" />
         </Link>
 
         {token ? (
           <div className="headerButton">
-            <Link to="/allfavorites">
+            <Link className="headerButton" to="/allfavorites">
               <button> My collection</button>
             </Link>
             <button
               className="headerBut"
               onClick={() => {
                 setToken("");
-                navigate("/home");
+                navigate(`/home?page=1`);
               }}
             >
               Log Out

@@ -6,9 +6,11 @@ import { Link, useNavigate } from "react-router-dom";
 import Reviews from "./Reviews";
 import notfound from "../images/Sorry.png";
 import Loader from "../components/Loader";
+import toast, { Toaster } from "react-hot-toast";
 
 const Games = ({ token }) => {
   const navigate = useNavigate();
+  const saved = () => toast(`GAME SAVED 😊 !`);
 
   const [data, setData] = useState("");
   const [gameLike, setGameLike] = useState("");
@@ -21,6 +23,7 @@ const Games = ({ token }) => {
   const [inFavorites, setInFavorites] = useState(false);
   const { id } = useParams();
 
+  // console.log("showreviews", showReviews);
   useEffect(() => {
     const favoritesList = async () => {
       try {
@@ -31,7 +34,7 @@ const Games = ({ token }) => {
               token: token,
             }
           );
-          console.log("res", response);
+          // console.log("res", response);
           // response.data.some((element) => element.id === data.id) &&
           setInFavorites(true);
         } else {
@@ -143,10 +146,11 @@ const Games = ({ token }) => {
         const response = await axios.get(
           `http://localhost:3000/allreviews/${id}`
         );
-        response.data.map((reviews) => ({
-          ...reviews,
-        }));
+        // response.data.map((reviews) => ({
+        //   ...reviews,
+        // }));
         setShowReviews(response);
+
         // console.log("responseallreviews", showReviews.data[0].date);
         // console.log("->", showReviews);
       } catch (error) {
@@ -183,7 +187,15 @@ const Games = ({ token }) => {
           </div>
           <div className="rightCol">
             <div className="rightCol2">
-              <button onClick={addGame}>Add to collection</button>
+              <button
+                onClick={() => {
+                  addGame();
+                  saved();
+                }}
+              >
+                <Toaster />
+                Add to collection
+              </button>
               <Link to={`/games/reviews/${id}`}>
                 <button>Add reviews</button>
               </Link>
@@ -205,7 +217,7 @@ const Games = ({ token }) => {
           <div className="col-bottom-left">
             <div>
               <p>Plateform :</p>
-              {data.platforms.map(({ platform: { name }, index }) => {
+              {data.platforms.map(({ platform: { name } }, index) => {
                 //   console.log("name ->", name);
                 return (
                   <div key={index}>
@@ -320,16 +332,13 @@ const Games = ({ token }) => {
 
         <h1 className="start-reviews">Reviews</h1>
         {showReviews.data.map(
-          ({
-            title,
-            reviews,
-            date,
-            author: { username, avatar_user },
-            index,
-          }) => {
+          (
+            { title, reviews, date, author: { username, avatar_user } },
+            index
+          ) => {
             // console.log(title);
             return (
-              <div className="allreviews">
+              <div className="allreviews" key={index}>
                 <div className="titlereviews">
                   <p>{title}</p>
                 </div>

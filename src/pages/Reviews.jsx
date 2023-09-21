@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const Reviews = ({ token }) => {
   const navigate = useNavigate();
@@ -30,13 +31,12 @@ const Reviews = ({ token }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
       if (formData.reviews.length < 10) {
-        setErrorMessage("You need at least 10 characters to publish a review.");
+        toast.error("You need at least 10 characters to publish a review.");
         return;
       } else if (formData.title.length < 5) {
-        setErrorMessage("You need at least 5 characters on title to publish");
+        toast.error("You need at least 5 characters on title to publish");
       } else {
         const response = await axios.post(
           `http://localhost:3000/games/reviews`,
@@ -54,20 +54,21 @@ const Reviews = ({ token }) => {
           }
         );
         console.log("Response:", response.data);
+        navigate(`/games/${id}`);
       }
-      navigate(`/games/${id}`);
     } catch (error) {
       // console.error("Error:", error.response);
       if (error.message === "Request failed with status code 400") {
         console.log("error.message", error.response);
-        setErrorMessage("You have already publish a reviews for this game 😉.");
-      } else setErrorMessage(`You need to be logged. Go to Login`);
+        toast.error("You have already publish a reviews for this game 😉.");
+      } else toast.error(`You need to be logged. Go to Login`);
       console.log(error);
     }
   };
 
   return (
     <div className="container form">
+      <Toaster />
       <form className="reviewsForm" onSubmit={handleSubmit}>
         <label htmlFor="title">Reviews title</label>
         <input

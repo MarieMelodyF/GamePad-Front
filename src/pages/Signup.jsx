@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import logo from "../images/smallLogo.png";
+import toast, { Toaster } from "react-hot-toast";
 
 const Signup = ({ token, setToken }) => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const Signup = ({ token, setToken }) => {
   const [imgCloudinary, setImgCloudinary] = useState("");
   const [avatar_user, setAvatar_user] = useState({});
 
-  const [sowhErrorMessage, setSowhErrorMessage] = useState(false);
+  // const [errorMessage, setErrorMessage] = useState();
 
   const handleUsername = (event) => {
     let value = event.target.value;
@@ -38,8 +39,7 @@ const Signup = ({ token, setToken }) => {
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
-      console.log(avatar_user);
-      setSowhErrorMessage(false);
+      // console.log(avatar_user);
       const formData = new FormData();
       formData.append("username", username);
       formData.append("email", email);
@@ -47,49 +47,50 @@ const Signup = ({ token, setToken }) => {
       formData.append("password2", password2);
       formData.append("avatar", avatar_user);
 
-      // console.log("data", data);
-      const response = await axios.post(
-        "http://localhost:3000/user/signup",
-        formData
-      );
-      console.log("res.data =>", response.data);
-      //   console.log("data2 =>", data);
-      const token = response.data.token;
-      // setAvatar_user(response.data.avatar_user.secure_url);
-      setToken(token);
       if (password === password2 && username !== "" && email !== "") {
-        alert("Your account is created ✨");
-      } else {
-        if (password !== password2) {
-          setSowhErrorMessage(true);
-        }
-        if (username === "") {
-          alert("Please enter a User name 💻 !");
-        }
-        if (email === "") {
-          alert("Please enter mail adress 📧 !");
-        }
-
-        if (password2 === "") {
-          alert("Please confirme your password");
-        }
+        toast.success("Your account is created ✨");
       }
-      navigate(`/home`);
+      if (password !== password2) {
+        toast.error("Please use same password");
+      }
+      if (username === "") {
+        toast.error("Please enter a User name 💻 !");
+      }
+      if (email === "") {
+        toast.error("Please enter mail adress 📧 !");
+      }
+      if (password2 === "") {
+        toast.error("Please confirme your password");
+      } else if (password === password2 && username && email) {
+        // console.log("data", data);
+        const response = await axios.post(
+          "http://localhost:3000/user/signup",
+          formData
+        );
+        console.log("res.data =>", response.data);
+        //   console.log("data2 =>", data);
+        const token = response.data.token;
+        // setAvatar_user(response.data.avatar_user.secure_url);
+        // navigate(`/home`);
+        setToken(token);
+        navigate("/home");
+      }
     } catch (error) {
-      //   console.log("==>", error.message);
-      if (error.message.data === "Email already exist ! Use your account 🚀") {
-        // setErrorMessage("Email already exist ! Use your account 🚀");
-        alert("Email already exist ! Use your account 🚀");
-      } else if (
-        error.response.data.message ===
-        "This username already exist ! Choose another username 🤟🏼 !"
-      ) {
-        alert("This username already exist ! Choose another username 🤟🏼 !");
-      }
+      console.log("==>", error);
     }
   };
   return (
     <div className="container form-log">
+      <Toaster
+        toastOptions={{
+          style: {
+            borderRadius: "10px",
+            border: "2px solid #050505",
+            padding: "16px",
+            backgroundColor: "##d1d1d1",
+          },
+        }}
+      />
       <div className="col-log-left">
         <img className="form-logo" src={logo} alt="" />
         <h1 className="title-form">How it works ?</h1>
