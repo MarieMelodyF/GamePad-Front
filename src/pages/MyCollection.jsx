@@ -57,7 +57,7 @@ const MyCollection = ({ token }) => {
           <div className="fav-game" key={id}>
             <h2>{title}</h2>
             <div>
-              <div className="fav">
+              <div>
                 <div className="delete">
                   <button
                     className="delete-button"

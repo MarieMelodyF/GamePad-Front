@@ -40,7 +40,7 @@ const AllGames = () => {
         );
         count = response.data.count;
 
-        console.log("response.data", response.data);
+        // console.log("response.data", response.data);
         setData(response.data);
         setIsLoading(false);
         setCount(count);
@@ -149,7 +149,7 @@ const AllGames = () => {
           </p>
           <p
             onClick={() => {
-              setOrdering("rating");
+              setOrdering("-rating");
             }}
           >
             Rating
@@ -157,14 +157,14 @@ const AllGames = () => {
         </div>
       </div>
 
+      {/* map sur results pour trouver les infos à recupérer */}
       <main className="container home">
-        {/* map sur results pour trouver les infos à recupérer */}
         {data.results.map(
-          ({ background_image, name, id, metacritic, rating }) => {
+          ({ background_image, name, id, metacritic, rating }, index) => {
             // console.log(background_image);
 
             return (
-              <div key={id}>
+              <div key={index}>
                 <div>
                   <Link to={`/games/${id}`} onClick={scrollToTop}>
                     {background_image === null ? (

@@ -3,10 +3,10 @@ import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const Footer = ({ token, setToken }) => {
+const Footer = () => {
   return (
     <footer>
-      <div className="footer ">
+      <div className="foot ">
         <div className="logo-footer">
           <img src={logo} alt="logo gamepad" />
         </div>

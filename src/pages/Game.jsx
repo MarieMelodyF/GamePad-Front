@@ -26,6 +26,8 @@ const Games = ({ token }) => {
   const [screenImg, setscreenImg] = useState([]);
   const { id } = useParams();
 
+  // console.log("responseallreviews", showReviews);
+
   // console.log("showreviews", showReviews);
   useEffect(() => {
     const favoritesList = async () => {
@@ -137,8 +139,6 @@ const Games = ({ token }) => {
         );
 
         setShowReviews(response);
-
-        console.log("responseallreviews", showReviews.data);
       } catch (error) {
         console.log("err", error.response);
       }
@@ -180,7 +180,7 @@ const Games = ({ token }) => {
                 <>
                   {title === "exceptional" ? (
                     <>
-                      <div className="rates">
+                      <div className="rates" key={index}>
                         <div>
                           <div className="circle"></div>
                         </div>
@@ -193,7 +193,7 @@ const Games = ({ token }) => {
                       </div>
                     </>
                   ) : title === "recommended" ? (
-                    <div className="rates">
+                    <div className="rates" key={index}>
                       <div>
                         <div className="circle2"></div>
                       </div>
@@ -217,7 +217,7 @@ const Games = ({ token }) => {
                       </div>
                     </div>
                   ) : (
-                    <div className="rates">
+                    <div className="rates" key={index}>
                       <div>
                         <div className="circle4"></div>
                       </div>
@@ -381,42 +381,49 @@ const Games = ({ token }) => {
         </div>
 
         <h1 className="start-reviews">Reviews</h1>
-        {showReviews.data.map(
-          (
-            { title, reviews, date, author: { username, avatar_user } },
-            index
-          ) => {
-            console.log("-->", showReviews.data);
-            return (
-              <div className="allreviews" key={index}>
-                {showReviews.data.length === 0 ? (
-                  <>
-                    <div>No reviews register</div>
-                  </>
-                ) : (
-                  <>
-                    <div className="titlereviews">
-                      <p>{title}</p>
-                    </div>
-                    <div className="reviews">
-                      <p>{reviews}</p>
-                    </div>
-                    <div className="user">
-                      <div className="user">
-                        <img
-                          className="img-user"
-                          src={avatar_user.secure_url}
-                          alt="avatar"
-                        />
-                        <p>{username}</p>
-                      </div>
-                      <span>{date.slice(4, 15)}</span>
-                    </div>
-                  </>
-                )}
+        {showReviews.data.length === 0 ? (
+          <>
+            <div className="card-no-reviews">
+              <div className="No-reviews">
+                <p>No reviews registers ...</p>
               </div>
-            );
-          }
+            </div>
+          </>
+        ) : (
+          <div className="allreviews">
+            {showReviews.data.map(
+              (
+                { title, reviews, date, author: { username, avatar_user } },
+                index
+              ) => {
+                console.log("-->", showReviews.data.length);
+                console.log(showReviews.data.length);
+                return (
+                  <>
+                    <div className="reviews-card">
+                      <div className="titlereviews" key={index}>
+                        <p>{title}</p>
+                      </div>
+                      <div className="reviews">
+                        <p>{reviews}</p>
+                      </div>
+                      <div className="user">
+                        <div className="user">
+                          <img
+                            className="img-user"
+                            src={avatar_user.secure_url}
+                            alt="avatar"
+                          />
+                          <p>{username}</p>
+                        </div>
+                        <span>{date.slice(4, 15)}</span>
+                      </div>
+                    </div>
+                  </>
+                );
+              }
+            )}
+          </div>
         )}
       </main>
     </>

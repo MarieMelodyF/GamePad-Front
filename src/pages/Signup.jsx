@@ -13,6 +13,7 @@ const Signup = ({ token, setToken }) => {
   const [password2, setPassword2] = useState("");
   const [imgCloudinary, setImgCloudinary] = useState("");
   const [avatar_user, setAvatar_user] = useState({});
+  console.log(avatar_user);
 
   // const [errorMessage, setErrorMessage] = useState();
 
@@ -161,19 +162,45 @@ const Signup = ({ token, setToken }) => {
           </div>
 
           <div className="right-form">
-            <input
+            {/* <input
               onChange={(event) => {
-                // console.log(event.target.files[0]);
                 setAvatar_user(event.target.files[0]);
               }}
               type="file"
               placeholder="Add a Photo"
+            /> */}
+
+            <label htmlFor="filePicker" className="files-select">
+              + Choose profil picture
+            </label>
+            <input
+              style={{ display: "none" }}
+              id="filePicker"
+              type="file"
+              onChange={(event) => {
+                setAvatar_user(event.target.files[0]);
+              }}
             />
+            <div>
+              {/* {avatar_user === null ? (
+                "picture"
+              ) : (
+                <img
+                  style={{
+                    height: "70px",
+                    borderRadius: "50%",
+                    marginLeft: "20px",
+                  }}
+                  src={URL.createObjectURL(avatar_user)}
+                  alt=""
+                />
+              )} */}
+            </div>
           </div>
 
           <button
             onClick={handleSubmit}
-            className="form-validation"
+            className="signup-button"
             type="submit"
           >
             Sign up

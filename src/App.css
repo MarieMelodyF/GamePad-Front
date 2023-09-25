@@ -487,11 +487,16 @@ i {
 /* ------------------- */
 /* ------------------- */
 
+.form {
+  padding-bottom: 300px;
+}
 .form-log {
   display: flex;
   margin-top: 150px;
-  height: 400px;
-  border-radius: 10px;
+  height: 450px;
+  width: 1000px;
+  margin-bottom: 290px;
+  /* border: 1px solid red; */
 }
 
 .login p {
@@ -517,8 +522,8 @@ i {
   align-items: center;
   gap: 30px;
   background: linear-gradient(to top, #181818 0%, #232525 50%, #323336 100%);
-  /* background-color: rgb(153, 119, 51); */
   width: 500px;
+  border-radius: 15px 0px 0px 15px;
 }
 .col-log-right {
   display: flex;
@@ -528,6 +533,7 @@ i {
   flex: 1;
   background: linear-gradient(to bottom, #181818 0%, #232525 50%, #323336 100%);
   /* background-color: rgb(51, 90, 153); */
+  border-radius: 0px 15px 15px 0px;
 }
 .icon {
   width: 100%;
@@ -559,9 +565,9 @@ i {
 }
 .form-logo {
   height: 40px;
-  position: absolute;
-  top: 260px;
-  left: 330px;
+  position: relative;
+  top: -80px;
+  left: -220px;
 }
 
 /* ------------------- */
@@ -592,6 +598,15 @@ form .input2 {
   flex-direction: column;
 }
 
+.signup-button {
+  cursor: pointer;
+  height: 30px;
+  width: 80px;
+  border-radius: 10px;
+  color: white;
+  margin-bottom: 20px;
+  background: linear-gradient(to right, #7f1d1d 0%, #991b1b 50%, #dc2626 100%);
+}
 /* ------------------- */
 /* ------------------- */
 /* ------REVIEWS------ */
@@ -601,16 +616,18 @@ form .input2 {
 .reviewsForm {
   display: flex;
   flex-direction: column;
-  /* border: 1px solid red; */
+  width: 650px;
   padding: 40px;
   background-color: #424448;
   border-radius: 10px;
+  /* border: 1px solid red; */
 }
 .form {
-  margin-top: 100px;
-  height: 290px;
-  width: 650px;
-  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+  height: 100vh - 98px;
 }
 label {
   margin-top: 20px;
@@ -651,12 +668,20 @@ label {
 }
 
 .allreviews {
-  background-color: #313235;
+  background-color: #202023;
   margin-bottom: 50px;
-  border-radius: 10px;
   color: white;
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
+.reviews-card {
+  margin-top: 10px;
+  background-color: #444343;
+  border-radius: 10px;
+}
 .titlereviews {
   text-decoration: underline;
   font-size: 18px;
@@ -664,10 +689,20 @@ label {
   color: white;
 }
 .reviews p {
-  /* background-color: purple; */
+  background-color: pur/le;
   font-size: 18px;
   padding: 10px;
   color: #bcbcbd;
+}
+
+.No-reviews p {
+  background-color: #313235;
+  height: 100px;
+  color: #bcbcbd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
 }
 
 .user p {
@@ -693,23 +728,31 @@ label {
 /* ------------------- */
 /* ------------------- */
 
+.favs {
+  border: 1px solid salmon;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
 .fav {
-  /* margin-top: 100px; */
   font-size: 20px;
   /* background-color: rgba(206, 154, 131, 0.684); */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  /* height: 1500px; */
+  height: calc(100vh - 98px);
+  /* border: 1px solid rgb(0, 255, 38); */
 }
 
 .fav-game {
-  /* display: flex; */
-  padding-top: 100px;
+  padding-top: 50px;
   font-size: 20px;
   margin-top: 20px;
   font-size: 20px;
   text-align: center;
-  /* border: 1px solid rgb(0, 255, 38); */
+  /* border: 1px solid rgb(255, 213, 0); */
 }
 .img-fav {
   height: 250px;
@@ -747,23 +790,23 @@ label {
 /* ------------------- */
 /* ------------------- */
 
-.footer {
-  margin-top: 70px;
+footer {
+  /* border: 1px solid red; */
+  flex: 1;
+  position: relative;
+  bottom: 0;
+}
+.foot {
   display: flex;
   background-color: #2a2a2a;
+  height: 80px;
   justify-content: space-around;
+  align-items: center;
 }
 .logo-footer img {
   display: flex;
   align-items: center;
   height: 50px;
   padding-bottom: 10px;
-}
-
-.byme {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  height: 100%;
   /* border: 1px solid red; */
 }
