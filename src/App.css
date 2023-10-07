@@ -1083,7 +1083,7 @@ footer {
   @media (max-width: 390px) {
     .container {
       width: 350px;
-      padding: 10px;
+      padding: 10px 0;
     }
 
     .Header_container > img {
@@ -1165,6 +1165,14 @@ footer {
     }
     .foot {
       font-size: 11px;
+    }
+    .all-filters {
+      font-size: 9px;
+      margin-right: 5px;
+    }
+    h4 {
+      font-size: 12px;
+      margin-left: 12px;
     }
   }
 }
