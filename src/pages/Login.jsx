@@ -51,7 +51,7 @@ const Login = ({ setToken }) => {
             event.preventDefault();
             try {
               const response = await axios.post(
-                `http://localhost:3000/user/login`,
+                `https://site--gamepad-back--r2txk865xjj8.code.run/user/login`,
                 {
                   email: email,
                   password: password,
@@ -60,7 +60,7 @@ const Login = ({ setToken }) => {
 
               // console.log("log connexion", response.data);
               // console.log("data.token", response.data.token);
-              navigate("/home");
+              navigate("/");
               setToken(response.data.token);
               // console.log("login", response.data.token);
               // console.log(response.data.token);

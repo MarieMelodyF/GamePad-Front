@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import img from "../images/notfound2.jpg";
 import Loader from "../components/Loader";
 // import Cookies from "js-cookie";
+import ReactPaginate from "react-paginate";
 
 const AllGames = () => {
   const navigate = useNavigate();
@@ -36,7 +37,8 @@ const AllGames = () => {
         const name = search || "";
         // console.log("name search =>", name);
         const response = await axios.get(
-          `http://localhost:3000/home?&search=${name}&page_size=${page_size}&page=${page}&ordering=${ordering}`
+          // `http://localhost:3000/home?&search=${name}&page_size=${page_size}&page=${page}&ordering=${ordering}`
+          `https://site--gamepad-back--r2txk865xjj8.code.run/home?&search=${name}&page_size=${page_size}&page=${page}&ordering=${ordering}`
         );
         count = response.data.count;
 
@@ -55,6 +57,7 @@ const AllGames = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
   return isLoading ? (
     <Loader />
   ) : (
@@ -67,7 +70,7 @@ const AllGames = () => {
               className="pageButton2"
               onClick={() => {
                 setPage(page - 1);
-                navigate(`/home?page=${page - 1}`);
+                navigate(`/?page=${page - 1}`);
                 // console.log(page);
               }}
             >
@@ -95,7 +98,7 @@ const AllGames = () => {
               className="pageButton"
               onClick={() => {
                 setPage(page + 1);
-                navigate(`/home?page=${page + 1}`);
+                navigate(`/?page=${page + 1}`);
                 // console.log(page);
               }}
             >
@@ -196,6 +199,7 @@ const AllGames = () => {
             );
           }
         )}
+
         <div className="to-top-button" onClick={scrollToTop}>
           Go to top
         </div>

@@ -39,7 +39,7 @@ const Reviews = ({ token }) => {
         toast.error("You need at least 5 characters on title to publish");
       } else {
         const response = await axios.post(
-          `http://localhost:3000/games/reviews`,
+          `https://site--gamepad-back--r2txk865xjj8.code.run/games/reviews`,
           {
             title: formData.title,
             reviews: formData.reviews,

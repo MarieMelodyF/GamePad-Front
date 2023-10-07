@@ -9,7 +9,7 @@ const Header = ({ token, setToken }) => {
   return (
     <header>
       <div className="Header_container">
-        <Link className="Header_container" to="/home">
+        <Link className="Header_container" to="/">
           <img src={logo} alt="logo game pad" />
         </Link>
 
@@ -21,7 +21,7 @@ const Header = ({ token, setToken }) => {
             <button
               onClick={() => {
                 setToken("");
-                navigate(`/home?page=1`);
+                navigate(`/?page=1`);
               }}
             >
               Log Out
@@ -29,11 +29,11 @@ const Header = ({ token, setToken }) => {
           </div>
         ) : (
           <div className="headerButton">
-            <Link to="/allfavorites">
+            <Link to="/user/signup">
               <button> My collection</button>
             </Link>
             <Link className="headerButton" to="/user/login">
-              <button> Login</button>
+              <button> Login / Sign in</button>
             </Link>
           </div>
         )}

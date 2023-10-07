@@ -34,7 +34,7 @@ const Games = ({ token }) => {
       try {
         if (token) {
           const response = await axios.post(
-            `http://localhost:3000/allfavorites`,
+            `https://site--gamepad-back--r2txk865xjj8.code.run/allfavorites`,
             {
               token: token,
             }
@@ -51,10 +51,10 @@ const Games = ({ token }) => {
 
     // AFFICHER LES INFOS DU JEUX
     const fetchData = async () => {
-      let one = `http://localhost:3000/games/${id}`;
-      let two = `http://localhost:3000/game/${id}/similar`;
-      let three = `http://localhost:3000/game/${id}/screenshots`;
-      let four = `http://localhost:3000/game/${id}/trailer`;
+      let one = `https://site--gamepad-back--r2txk865xjj8.code.run/games/${id}`;
+      let two = `https://site--gamepad-back--r2txk865xjj8.code.run/game/${id}/similar`;
+      let three = `https://site--gamepad-back--r2txk865xjj8.code.run/game/${id}/screenshots`;
+      let four = `https://site--gamepad-back--r2txk865xjj8.code.run/game/${id}/trailer`;
       const requestOne = axios.get(one);
       const requestTwo = axios.get(two);
       const requestThree = axios.get(three);
@@ -116,10 +116,13 @@ const Games = ({ token }) => {
             image: data.background_image,
           };
           console.log("favorite", favorite);
-          const response = await axios.post(`http://localhost:3000/favorite`, {
-            token: token,
-            favorite: favorite,
-          });
+          const response = await axios.post(
+            `https://site--gamepad-back--r2txk865xjj8.code.run/favorite`,
+            {
+              token: token,
+              favorite: favorite,
+            }
+          );
           console.log("responseAddGame", response);
         } catch (error) {
           console.log("error add game", error.response);
@@ -135,7 +138,7 @@ const Games = ({ token }) => {
     const allReviews = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/allreviews/${id}`
+          `https://site--gamepad-back--r2txk865xjj8.code.run/allreviews/${id}`
         );
 
         setShowReviews(response);
@@ -157,8 +160,8 @@ const Games = ({ token }) => {
     <>
       <main className="container">
         <section className="infos">
-          <div className="leftCol">
-            <div>
+          <div className="leftCol" key={id}>
+            <div key={id}>
               <h1>{data.name}</h1>
             </div>
 
@@ -205,7 +208,7 @@ const Games = ({ token }) => {
                       </div>
                     </div>
                   ) : title === "meh" ? (
-                    <div className="rates">
+                    <div className="rates" key={index}>
                       <div>
                         <div className="circle3"></div>
                       </div>
@@ -236,19 +239,37 @@ const Games = ({ token }) => {
 
           <div className="rightCol">
             <div className="rightCol2">
-              <button
-                className="button-game"
-                onClick={() => {
-                  addGame();
-                  saved();
-                }}
-              >
-                <Toaster />
-                Add to collection
-              </button>
-              <Link to={`/games/reviews/${id}`}>
-                <button className="button-game">Add reviews</button>
-              </Link>
+              {token ? (
+                <button
+                  className="button-game"
+                  onClick={() => {
+                    addGame();
+                    saved();
+                  }}
+                >
+                  <Toaster />
+                  Add to collection
+                </button>
+              ) : (
+                <button
+                  className="button-game"
+                  onClick={() => {
+                    navigate("/user/login");
+                  }}
+                >
+                  <Toaster />
+                  Add to collection
+                </button>
+              )}
+              {token ? (
+                <Link to={`/games/reviews/${id}`}>
+                  <button className="button-game">Add reviews</button>
+                </Link>
+              ) : (
+                <Link to={`/user/login`}>
+                  <button className="button-game">Add reviews</button>
+                </Link>
+              )}
             </div>
 
             <div className="rightCol1">
@@ -396,8 +417,6 @@ const Games = ({ token }) => {
                 { title, reviews, date, author: { username, avatar_user } },
                 index
               ) => {
-                console.log("-->", showReviews.data.length);
-                console.log(showReviews.data.length);
                 return (
                   <>
                     <div className="reviews-card">

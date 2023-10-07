@@ -26,7 +26,7 @@ span {
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 35px;
   margin-bottom: 10px;
 }
 
@@ -40,7 +40,7 @@ h4 {
 }
 
 .h2-game {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: bold;
   padding: 30px 0;
   text-decoration: underline;
@@ -87,7 +87,7 @@ header {
 .headerButton button {
   cursor: pointer;
   height: 40px;
-  width: 100px;
+  width: 150px;
   border-radius: 10px;
   color: white;
   font-weight: bold;
@@ -144,6 +144,7 @@ header {
   object-fit: cover;
   border-radius: 10px;
   /* border: 1px solid red; */
+  cursor: pointer;
 }
 
 .home {
@@ -172,6 +173,7 @@ i {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  font-size: 18px;
 }
 
 .pageButton {
@@ -264,12 +266,13 @@ i {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin-top: 20px;
+  margin: 20px 0;
   height: 40px;
   width: 100px;
   border-radius: 10px;
   color: white;
   background: linear-gradient(to left, #7f1d1d 0%, #991b1b 50%, #dc2626 100%);
+  cursor: n-resize;
 }
 /* ------------------- */
 /* ------------------- */
@@ -336,7 +339,7 @@ i {
 .button-game {
   cursor: pointer;
   height: 30px;
-  width: 80px;
+  width: 130px;
   border-radius: 10px;
   color: white;
   font-weight: bold;
@@ -381,7 +384,7 @@ i {
 } */
 .rightCol2 {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   gap: 30px;
   height: 80px;
   /* background-color: rgb(140, 123, 157); */
@@ -430,6 +433,7 @@ i {
 
 .about {
   text-align: justify;
+  line-height: 25px;
 }
 .inOtherGame {
   height: 280px;
@@ -592,6 +596,8 @@ form .input2 {
 .right-form {
   padding: 20px 0;
   display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 .top-form {
   display: flex;
@@ -607,6 +613,7 @@ form .input2 {
   margin-bottom: 20px;
   background: linear-gradient(to right, #7f1d1d 0%, #991b1b 50%, #dc2626 100%);
 }
+
 /* ------------------- */
 /* ------------------- */
 /* ------REVIEWS------ */
@@ -703,6 +710,7 @@ label {
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  margin: 30px 0 150px 0;
 }
 
 .user p {
@@ -782,6 +790,16 @@ label {
   width: 30px;
   background-color: red;
   color: white;
+}
+
+.no-fav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  width: 500px;
+  font-size: 15px;
 }
 
 /* ------------------- */

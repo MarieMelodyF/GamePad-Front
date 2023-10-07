@@ -12,8 +12,8 @@ const Signup = ({ token, setToken }) => {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [imgCloudinary, setImgCloudinary] = useState("");
-  const [avatar_user, setAvatar_user] = useState({});
-  console.log(avatar_user);
+  const [avatar_user, setAvatar_user] = useState(false);
+  console.log("=======>", avatar_user);
 
   // const [errorMessage, setErrorMessage] = useState();
 
@@ -65,14 +65,14 @@ const Signup = ({ token, setToken }) => {
       } else if (password === password2 && username && email) {
         // console.log("data", data);
         const response = await axios.post(
-          "http://localhost:3000/user/signup",
+          "https://site--gamepad-back--r2txk865xjj8.code.run/user/signup",
           formData
         );
         // console.log("res.data =>", response.data);
         const token = response.data.token;
         // setAvatar_user(response.data.avatar_user.secure_url);
         setToken(token);
-        navigate("/home");
+        navigate("/");
       }
     } catch (error) {
       console.log("==>", error);
@@ -182,8 +182,8 @@ const Signup = ({ token, setToken }) => {
               }}
             />
             <div>
-              {/* {avatar_user === null ? (
-                "picture"
+              {avatar_user === false ? (
+                <p style={{ marginTop: "10px" }}> No avatar chosen</p>
               ) : (
                 <img
                   style={{
@@ -194,7 +194,7 @@ const Signup = ({ token, setToken }) => {
                   src={URL.createObjectURL(avatar_user)}
                   alt=""
                 />
-              )} */}
+              )}
             </div>
           </div>
 
