@@ -199,11 +199,12 @@ const AllGames = () => {
             );
           }
         )}
-
-        <div className="to-top-button" onClick={scrollToTop}>
-          Go to top
-        </div>
       </main>
+      <div className="to-top">
+        <p className="to-top-button" onClick={scrollToTop}>
+          Go to top
+        </p>
+      </div>
     </>
   );
 };
