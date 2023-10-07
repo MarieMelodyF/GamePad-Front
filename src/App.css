@@ -1076,4 +1076,95 @@ footer {
     width: 100%;
     border: none;
   }
+
+  /* ---------------------------- */
+  /* ----------390PX------------- */
+  /* ---------------------------- */
+  @media (max-width: 390px) {
+    .container {
+      width: 350px;
+      padding: 10px;
+    }
+
+    .Header_container > img {
+      height: 40px;
+    }
+
+    .headerButton {
+      gap: 10px;
+      max-width: 200px;
+    }
+
+    .headerButton button {
+      width: 100px;
+      font-size: 12px;
+    }
+
+    .search_barre {
+      max-width: 200px;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: -150px;
+    }
+
+    .h2-game {
+      text-align: center;
+    }
+    .imgGames {
+      max-width: 150px;
+    }
+
+    .imgGame {
+      height: 350px;
+      width: 100%;
+      object-fit: cover;
+    }
+    .inOtherGame {
+      object-fit: cover;
+    }
+
+    .infos-bottom {
+      width: 350px;
+    }
+
+    .leftCol {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    div .trailer {
+      width: 100%;
+      border: none;
+      margin-top: -100px;
+    }
+    .h2-game {
+      font-size: 15px;
+      margin-bottom: -10px;
+    }
+    .about {
+      font-size: 13px;
+    }
+    p.title {
+      height: 45px;
+      border-radius: 0 0 10px 10px;
+    }
+    div .allreviews {
+      max-width: 100%;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    .reviews-card p {
+      font-size: 12px;
+    }
+
+    .user img {
+      height: 35px;
+    }
+    .foot {
+      font-size: 11px;
+    }
+  }
 }
