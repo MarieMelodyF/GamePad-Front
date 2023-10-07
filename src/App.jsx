@@ -16,7 +16,7 @@ import Footer from "./components/Footer";
 function App() {
   const [token, setToken] = useState(Cookies.get("token"));
 
-  const API_KEY = "899db466e6d64907bb6dbc7dd3670574";
+  // const API_KEY = "899db466e6d64907bb6dbc7dd3670574";
 
   useEffect(() => {
     if (token) {
@@ -34,38 +34,23 @@ function App() {
         <Header token={token} setToken={setToken} />
         <Routes>
           <Route path="/" element={<AllGames />} />
-          <Route
-            path="/games/:id"
-            element={<Games API_KEY={API_KEY} token={token} />}
-          />
+          <Route path="/games/:id" element={<Games token={token} />} />
           <Route
             path="/user/login"
-            element={
-              <Login API_KEY={API_KEY} token={token} setToken={setToken} />
-            }
+            element={<Login token={token} setToken={setToken} />}
           />
           <Route
             path="/user/signup"
-            element={
-              <Signup API_KEY={API_KEY} token={token} setToken={setToken} />
-            }
+            element={<Signup token={token} setToken={setToken} />}
           />
           <Route
             path="/games/reviews/:id"
-            element={
-              <Reviews API_KEY={API_KEY} token={token} setToken={setToken} />
-            }
+            element={<Reviews token={token} setToken={setToken} />}
           />
 
           <Route
             path="/allfavorites"
-            element={
-              <MyCollection
-                API_KEY={API_KEY}
-                token={token}
-                setToken={setToken}
-              />
-            }
+            element={<MyCollection token={token} setToken={setToken} />}
           />
         </Routes>
         <Footer token={token} setToken={setToken} />
