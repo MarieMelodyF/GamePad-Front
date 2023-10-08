@@ -1237,7 +1237,6 @@ footer {
       align-items: center;
       font-size: 13px;
       height: calc(100vh - 250px);
-      border: 1px solid violet;
     }
 
     .col-log-right {
