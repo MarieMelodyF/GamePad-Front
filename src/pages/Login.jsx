@@ -24,24 +24,28 @@ const Login = ({ setToken }) => {
       />
       <div className="col-log-left">
         <img className="form-logo" src={logo} alt="" />
-        <h1 className="title-form">How it works ?</h1>
-
-        <div className="icon">
-          <i className="fa-regular fa-user"></i>
-          <p>
-            Log in to your free account to be able to get all features of
-            Gamepad
-          </p>
+        <div className="title-form">
+          <h1>How it works ?</h1>
         </div>
 
-        <div className="icon">
-          <i className="fa-regular fa-bookmark"></i>
-          <p>Add a game to your collection</p>
-        </div>
+        <div className="log-left-int">
+          <div className="icon">
+            <i className="fa-regular fa-user"></i>
+            <p>
+              Log in to your free account to be able to get all features of
+              Gamepad
+            </p>
+          </div>
 
-        <div className="icon">
-          <i className="fa-regular fa-message"></i>
-          <p>Leave a review for a game</p>
+          <div className="icon">
+            <i className="fa-regular fa-bookmark"></i>
+            <p>Add a game to your collection</p>
+          </div>
+
+          <div className="icon">
+            <i className="fa-regular fa-message"></i>
+            <p>Leave a review for a game</p>
+          </div>
         </div>
       </div>
       <div className="col-log-right">
